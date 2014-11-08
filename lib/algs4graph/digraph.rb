@@ -29,6 +29,7 @@ class Digraph
               ].join("\n")
       g = self.initialize_from(sio)
       puts g
+      puts g.reverse
     end
   end
 
@@ -39,6 +40,16 @@ class Digraph
 
   def add_edge(v, w)
     @adj[v].push(w) unless @adj[v].include? w
+  end
+
+  def reverse
+    graph = self.class.new(self.vertex)
+    (0...self.vertex).each do |v|
+      @adj[v].each do |w|
+        graph.add_edge(w, v)
+      end
+    end
+    graph
   end
 
   private
