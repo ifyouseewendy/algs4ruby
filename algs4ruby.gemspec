@@ -1,15 +1,21 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'algs4graph/version'
+require 'algs4ruby/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "algs4graph"
-  spec.version       = Algs4graph::VERSION
+  spec.name          = "algs4ruby"
+  spec.version       = Algs4ruby::VERSION
   spec.authors       = ["wendi"]
   spec.email         = ["ifyouseewendy@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Algorithms implemented by Ruby}
+  spec.description   = <<-HERE
++ Graph
+  - (Di)graph
+  - DFS, BFS
+  - Topological Sort
+  - (Strong) Connected Component
+  HERE
   spec.homepage      = ""
   spec.license       = "MIT"
 
