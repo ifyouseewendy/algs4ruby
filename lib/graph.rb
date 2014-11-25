@@ -1,7 +1,0 @@
-require 'graph/graph'
-require 'graph/digraph'
-require 'graph/depth_first_paths'
-require 'graph/breadth_first_paths'
-require 'graph/topological_order'
-require 'graph/cc'
-require 'graph/scc'

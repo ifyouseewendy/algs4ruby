@@ -1,0 +1,4 @@
+require_relative 'union_find/quick_find'
+require_relative 'union_find/quick_union'
+require_relative 'union_find/weighted_quick_union'
+require_relative 'union_find/weighted_quick_union_with_path_compression'
