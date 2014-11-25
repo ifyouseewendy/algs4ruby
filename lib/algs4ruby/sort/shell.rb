@@ -22,15 +22,17 @@ class Shell
       arr
     end
 
-    def less(a, b)
-      a < b
-    end
+    private
 
-    def exch(arr, i, j)
-      t       = arr[i]
-      arr[i]  = arr[j]
-      arr[j]  = t
-    end
+      def less(a, b)
+        a < b
+      end
+
+      def exch(arr, i, j)
+        t       = arr[i]
+        arr[i]  = arr[j]
+        arr[j]  = t
+      end
 
   end
 end
