@@ -1,10 +1,12 @@
+require_relative 'insertion'
+
 class Shuffling
   class << self
 
     ##
     # Knuth Shuffle O(N)
     #
-    def sort(array)
+    def shuffle(array)
       arr = array.clone
       n   = arr.length
 
@@ -14,6 +16,21 @@ class Shuffling
       end
 
       arr
+    end
+
+    ##
+    # Shuffle based on sort, O(NlgN)
+    #
+    Pair = Struct.new(:num, :value) do
+      def <(other)
+        value < other.value
+      end
+    end
+
+    def shuffle2(array)
+      n   = array.length
+      pairs = (0..n-1).reduce([]){|res, i| res << Pair.new(array[i], rand(n)) }
+      Insertion.sort(pairs).map(&:num)
     end
 
     private

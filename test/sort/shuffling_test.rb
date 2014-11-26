@@ -8,6 +8,7 @@ class ShufflingTest < MiniTest::Unit::TestCase
   end
 
   def test_sort
-    refute_equal @array.sort, Shuffling.sort(@array)
+    refute_equal @array.sort, Shuffling.shuffle(@array)
+    refute_equal @array.sort, Shuffling.shuffle2(@array)
   end
 end
