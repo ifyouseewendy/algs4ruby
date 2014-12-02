@@ -11,4 +11,9 @@ class MergeTest < MiniTest::Unit::TestCase
     assert_equal @array.sort, Merge.sort(@array)
     assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
   end
+
+  def test_sort_by_bottum_up
+    assert_equal @array.sort, Merge.sort(@array, :bottom_up)
+    assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
+  end
 end
