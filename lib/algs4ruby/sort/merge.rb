@@ -2,20 +2,17 @@ class Merge
   class << self
 
     def sort(array)
-      _sort(array, 0, array.length-1)
+      return array if array.count == 1
+
+      low, high = 0, array.length-1
+      mid = (low+high)/2
+
+      first   = sort(array[low..mid])
+      second  = sort(array[mid+1..high])
+      merge(first, second)
     end
 
     private
-
-      def _sort(array, low, high)
-        mid   = (low + high)/2
-
-        return [ array[low] ] if low >= high
-
-        first   = _sort(array, low, mid)
-        second  = _sort(array, mid+1, high)
-        merge(first, second)
-      end
 
       def merge(first, second)
         i, j = 0, 0
