@@ -1,7 +1,7 @@
 class Shell
   class << self
 
-    def sort(array)
+    def sort(array, &block)
       arr = array.clone
       n   = arr.length
 
@@ -14,7 +14,7 @@ class Shell
 
           (i+1).step(0, 0-stride) do |j|
             next if j < stride
-            exch(arr, j, j-stride) if less(arr[j], arr[j-stride])
+            exch(arr, j, j-stride) if less(arr[j], arr[j-stride], &block)
           end
         end
       end
@@ -24,8 +24,8 @@ class Shell
 
     private
 
-      def less(a, b)
-        a < b
+      def less(a, b, &block)
+        block_given? ? yield(a,b) : a < b
       end
 
       def exch(arr, i, j)
