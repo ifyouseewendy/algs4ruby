@@ -1,45 +1,39 @@
-require_relative 'insertion'
+module Sorting
 
-class Shuffling
-  class << self
+  class Shuffling < Base
+    class << self
 
-    ##
-    # Knuth Shuffle O(N)
-    #
-    def shuffle(array)
-      arr = array.clone
-      n   = arr.length
+      ##
+      # Knuth Shuffle O(N)
+      #
+      def shuffle(array)
+        arr = array.clone
+        n   = arr.length
 
-      (0..n-1).each do |i|
-        r = rand(i+1)
-        exch(arr, i, r)
+        (0..n-1).each do |i|
+          r = rand(i+1)
+          exch(arr, i, r)
+        end
+
+        arr
       end
 
-      arr
-    end
-
-    ##
-    # Shuffle based on sort, O(NlgN)
-    #
-    Pair = Struct.new(:num, :value) do
-      def <(other)
-        value < other.value
-      end
-    end
-
-    def shuffle2(array)
-      n   = array.length
-      pairs = (0..n-1).reduce([]){|res, i| res << Pair.new(array[i], rand(n)) }
-      Insertion.sort(pairs).map(&:num)
-    end
-
-    private
-
-      def exch(arr, i, j)
-        t       = arr[i]
-        arr[i]  = arr[j]
-        arr[j]  = t
+      ##
+      # Shuffle based on sort, O(NlgN)
+      #
+      Pair = Struct.new(:num, :value) do
+        def <(other)
+          value < other.value
+        end
       end
 
+      def shuffle2(array)
+        n   = array.length
+        pairs = (0..n-1).reduce([]){|res, i| res << Pair.new(array[i], rand(n)) }
+        Insertion.sort(pairs).map(&:num)
+      end
+
+    end
   end
+
 end
