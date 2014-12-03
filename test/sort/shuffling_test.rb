@@ -8,9 +8,12 @@ module Sorting
       @array = (1..10).to_a
     end
 
-    def test_sort
+    def test_shuffle
       refute_equal @array.sort, Shuffling.shuffle(@array)
-      refute_equal @array.sort, Shuffling.shuffle2(@array)
+    end
+
+    def test_shuffle_by_sort
+      refute_equal @array.sort, Shuffling.shuffle(@array, :sort)
     end
   end
 end
