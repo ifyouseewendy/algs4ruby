@@ -1,4 +1,8 @@
 module Sorting
+  %i(Selection Insertion Shell Shuffling Merge).each do |mod|
+    autoload(mod,  File.expand_path("sort/#{mod.downcase}",  File.dirname(__FILE__)) )
+  end
+
   class Base
     class << self
       def sort(array, strategy = nil, &block)
@@ -20,9 +24,3 @@ module Sorting
 
   end
 end
-
-require_relative 'sort/selection'
-require_relative 'sort/insertion'
-require_relative 'sort/shell'
-require_relative 'sort/shuffling'
-require_relative 'sort/merge'
