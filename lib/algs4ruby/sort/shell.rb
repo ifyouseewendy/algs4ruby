@@ -1,6 +1,9 @@
 module Sorting
   class Shell < Base
     class << self
+      # O(N^1.5), by Knuth's Increment Sequence, 3N+1
+      # Not stable
+
       def sort(array, &block)
         arr = array.clone
         n   = arr.length

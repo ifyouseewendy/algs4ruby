@@ -2,6 +2,8 @@ module Sorting
 
   class Shuffling < Base
     class << self
+      # O(N),     by Knuth Shuffle
+      # O(NlgN),  by Sort Shuffle
 
       def shuffle(array, strategy = :knuth)
         send("#{strategy}_shuffle", array)
@@ -9,9 +11,6 @@ module Sorting
 
       private
 
-        ##
-        # Knuth Shuffle O(N)
-        #
         def knuth_shuffle(array)
           arr = array.clone
           n   = arr.length
@@ -24,9 +23,6 @@ module Sorting
           arr
         end
 
-        ##
-        # Shuffle based on sort, O(NlgN)
-        #
         def sort_shuffle(array)
           pair_class = Struct.new(:num, :value) do
             def <(other)

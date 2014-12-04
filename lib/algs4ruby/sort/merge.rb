@@ -2,11 +2,13 @@ module Sorting
 
   class Merge < Base
     class << self
+      # O(NlgN)
+      # Stable
 
       ##
       # Practical Improvement
       #
-      # 1. Add cutoff, use Insertion for small arrays
+      # 1. Add CUTOFF, use Insertion for small arrays
       # 2. No merge if already sorted
 
       CUTOFF = 7
@@ -49,6 +51,7 @@ module Sorting
         end
 
         def merge(first, second, &block)
+          # No merge if already sorted
           return first + second if second.empty? or less(first[-1], second[0], &block)
 
           i, j = 0, 0
