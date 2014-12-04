@@ -18,7 +18,7 @@ module Algs4ruby
 
   autoload_modules(
     :Graph,
-    :Sort,
+    :Sorting,
     :StackAndQueue,
     :Version,
     :UnionFind
