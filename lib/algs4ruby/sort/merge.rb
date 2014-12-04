@@ -59,10 +59,11 @@ module Sorting
               aux << second[j]; j += 1
             elsif j >= second.length
               aux << first[i]; i += 1
-            elsif less(first[i], second[j], &block)
-              aux << first[i]; i += 1
-            else
+            elsif less(second[j], first[i], &block)
+              # Pick element in first half when equal, which makes merge sort stable
               aux << second[j]; j += 1
+            else
+              aux << first[i]; i += 1
             end
           end
 
