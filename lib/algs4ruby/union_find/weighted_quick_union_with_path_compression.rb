@@ -1,50 +1,32 @@
 class WeightedQuickUnionWithPathCompression
-  class << self
-    def test
-      io = StringIO.new\
-              [
-                '10',
-                '4 3',
-                '3 8',
-                '6 5',
-                '9 4',
-                '2 1',
-                '8 9',
-                '5 0',
-                '7 2',
-                '6 1',
-                '1 0',
-                '6 7'
-              ].join("\n")
+  ##
+  # O(NlgN), to process N union commands on N objects.
+  #
+  # initialize union find
+  #         N   lg*N lg*N (lg*65536 = 4, almost linear)
+  #
+  # + Weighted. Link root of smaller tree to root of larger tree.
+  #   - size
+  #   - height
+  #   - rank
+  # + Path Compression. After computing the root of p,
+  #   set the id of each examined node to point to that root.
 
-      weighted_quick_union_with_path_compression = self.new(io.readline.strip.to_i)
-      while !io.eof?
-        p, q = io.readline.strip.split.map(&:to_i)
-        weighted_quick_union_with_path_compression.union(p, q)
-      end
-
-      puts weighted_quick_union_with_path_compression
-      puts "0 is connected to 7 ? #{weighted_quick_union_with_path_compression.connected?(0, 7)}"
-      puts "1 is connected to 8 ? #{weighted_quick_union_with_path_compression.connected?(1, 8)}"
-      puts "3 is connected to 4 ? #{weighted_quick_union_with_path_compression.connected?(3, 4)}"
-    end
+  def initialize(n, strategy = :size)
+    @id       = Array.new(n){|i| i}
+    @weight   = Array.new(n, 0)
+    @strategy = strategy
   end
 
-  def initialize(n)
-    @id = Array.new(n){|i| i}
-    @size = Array.new(n, 0)
-  end
-
-  # Weighted Union by size
   def union(p, q)
     rp, rq = root(p), root(q)
     return if rp == rq
-    if @size[rp] < @size[rq]
+    if @weight[rp] < @weight[rq]
       @id[rp] = rq
-      @size[rq] += @size[rp]
+      update_weight(rq, rp)
     else
       @id[rq] = rp
-      @size[rp] += @size[rq]
+      update_weight(rp, rq)
     end
   end
 
@@ -54,13 +36,23 @@ class WeightedQuickUnionWithPathCompression
 
   private
 
-    # Path compression
     def root(i)
       while i != @id[i]
-        @id[i] = @id[ @id[i] ]
+        @id[i] = @id[ @id[i] ] # Path Compression
         i = @id[i]
       end
       i
+    end
+
+    def update_weight(p, q)
+      case @strategy
+      when :size
+        @weight[p] += @weight[q]
+      when :height
+        @weight[p] += 1 if @weight[p] == @weight[q]
+      else
+        raise NotImplementedError, @strategy
+      end
     end
 
     def to_s
