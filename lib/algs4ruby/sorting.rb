@@ -9,6 +9,7 @@ module Algs4ruby
         Shell
         Shuffling
         Merge
+        Quick
       )
 
     class Base
@@ -20,7 +21,13 @@ module Algs4ruby
         private
 
           def less(a, b, &block)
-            block_given? ? yield(a,b) : a < b
+            if @block
+              @block.call(a,b)
+            elsif block_given?
+              yield(a,b)
+            else
+              a < b
+            end
           end
 
           def exch(arr, i, j)
