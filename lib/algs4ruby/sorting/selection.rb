@@ -2,8 +2,9 @@ module Algs4ruby
   module Sorting
     class Selection < Base
       class << self
-        # O(N^2)
-        # Not stable
+        # = O(N^2)
+        #
+        # = Not stable
 
         def sort(array, &block)
           arr = array.clone

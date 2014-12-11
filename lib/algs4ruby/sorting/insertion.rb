@@ -2,8 +2,9 @@ module Algs4ruby
   module Sorting
     class Insertion < Base
       class << self
-        # O(N^2)
-        # Stable
+        # = O(N^2)
+        #
+        # = Stable
 
         def sort(array, &block)
           arr = array.clone

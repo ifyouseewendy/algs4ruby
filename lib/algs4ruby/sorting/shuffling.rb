@@ -3,8 +3,13 @@ module Algs4ruby
 
     class Shuffling < Base
       class << self
-        # O(N),     by Knuth Shuffle
-        # O(NlgN),  by Sort Shuffle
+        # = O(N)
+        #
+        #   by Knuth Shuffle
+        #
+        # = O(NlgN)
+        #
+        #   by Sort Shuffle
 
         def shuffle(array, strategy = :knuth)
           send("#{strategy}_shuffle", array)
