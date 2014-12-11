@@ -44,7 +44,6 @@ module Algs4ruby
       end
 
       def test_sort_stability
-        skip
         refute_equal ['Bryant', 'Dapian', 'Larry', 'Liuwei'],
           Quick.sort(@pairs){|a,b| a.number < b.number }.select{|p| p.number == 8}.map(&:name)
 

@@ -3,24 +3,28 @@ module Algs4ruby
 
     class Quick < Base
       class << self
-        # O(NlgN)
+        # = O(NlgN)
+        #
         #   1/3 faster than MergeSort empirically,
         #   because of less data movement.
         #
-        # Not stable
+        # = Not stable
+        #
+        # = In-place
+        #
+        #   This is an in-place version of implemention.
+        #
+        #   But not strict technically because of the out-of-place
+        #   version of Shuffling and Insertion.
+        #
+        #   Quick sort can not or hard to make out-of-space version,
+        #   as partition need to manipulate the array.
+        #
+        # = Improvements
+        #
+        #   + Sort manually (Insertion) for small arrays.
+        #   + Exchange median before partition.
 
-        # This is an in-place version of implemention.
-        #
-        # But not strict technically because of the out-of-place
-        # version of Shuffling and Insertion.
-        #
-        # Quick sort can not or hard to make out-of-space version,
-        # as partition need to manipulate the array.
-
-        # TODO
-        #
-        # 1. make out-of-place version
-        # 2. make in-place version
 
         def sort(array, strategy = :recursive, &block)
           @block = block
@@ -32,8 +36,16 @@ module Algs4ruby
 
         private
 
+          CUTOFF = 5
+
           def recursive_sort(array, lo, hi)
             return if lo >= hi
+
+            len = hi - lo + 1
+            return manual_sort(array, lo, hi) if len <= CUTOFF
+
+            median = median3_of(array, lo, lo+len/2, hi)
+            exch(array, lo, median)
 
             pivot = partition(array, lo, hi)
 
@@ -65,6 +77,20 @@ module Algs4ruby
             return j
           end
 
+          def manual_sort(array, lo, hi)
+            # Insertion for small arrays.
+            arr = Insertion.sort(array[lo..hi], &@block)
+            (lo..hi).each_with_index{|i,j| array[i] = arr[j] }
+            nil
+          end
+
+          def median3_of(a, i, j, k)
+            if less(a[i], a[j])
+              less(a[j], a[k]) ? j : (less(a[i], a[k]) ? k : i)
+            else
+              less(a[i], a[k]) ? i : (less(a[j], a[k]) ? k : j)
+            end
+          end
       end
     end
 
