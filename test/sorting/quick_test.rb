@@ -31,24 +31,9 @@ module Algs4ruby
         assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
       end
 
-      def test_sort_by_bottum_up
-        skip
-        assert_equal @array.sort, Quick.sort(@array, :bottom_up)
-        assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
-      end
-
-      def test_sort_by_bottum_up_by_specific_order
-        skip
-        assert_equal @array.sort.reverse, Quick.sort(@array, :bottom_up){|a,b| a > b}
-        assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
-      end
-
       def test_sort_stability
         refute_equal ['Bryant', 'Dapian', 'Larry', 'Liuwei'],
           Quick.sort(@pairs){|a,b| a.number < b.number }.select{|p| p.number == 8}.map(&:name)
-
-        refute_equal ['Bryant', 'Dapian', 'Larry', 'Liuwei'],
-          Quick.sort(@pairs, :bottom_up){|a,b| a.number < b.number }.select{|p| p.number == 8}.map(&:name)
       end
     end
   end

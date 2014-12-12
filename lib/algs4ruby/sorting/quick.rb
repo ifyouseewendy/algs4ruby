@@ -26,16 +26,20 @@ module Algs4ruby
         #   + Exchange median before partition.
 
 
-        def sort(array, strategy = :recursive, &block)
+        def sort(array, strategy = :default, &block)
           @block = block
 
           array = Shuffling.shuffle(array) # already cloned
+
+          self.class_eval{ extend const_get("Strategy::#{strategy.capitalize}") }
           recursive_sort(array, 0, array.length-1)
+
           array
         end
+      end
 
-        private
-
+      module Strategy
+        module Default
           CUTOFF = 5
 
           def recursive_sort(array, lo, hi)
@@ -77,21 +81,28 @@ module Algs4ruby
             return j
           end
 
-          def manual_sort(array, lo, hi)
-            # Insertion for small arrays.
-            arr = Insertion.sort(array[lo..hi], &@block)
-            (lo..hi).each_with_index{|i,j| array[i] = arr[j] }
-            nil
-          end
+          private
 
-          def median3_of(a, i, j, k)
-            if less(a[i], a[j])
-              less(a[j], a[k]) ? j : (less(a[i], a[k]) ? k : i)
-            else
-              less(a[i], a[k]) ? i : (less(a[j], a[k]) ? k : j)
+            def manual_sort(array, lo, hi)
+              # Insertion for small arrays.
+              arr = Insertion.sort(array[lo..hi], &@block)
+              (lo..hi).each_with_index{|i,j| array[i] = arr[j] }
+              nil
             end
-          end
+
+            def median3_of(a, i, j, k)
+              if less(a[i], a[j])
+                less(a[j], a[k]) ? j : (less(a[i], a[k]) ? k : i)
+              else
+                less(a[i], a[k]) ? i : (less(a[j], a[k]) ? k : j)
+              end
+            end
+        end
+
+        module EntropyOptimal # Dijkstra 3 way partition
+        end
       end
+
     end
 
   end
