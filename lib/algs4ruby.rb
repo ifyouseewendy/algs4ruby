@@ -8,11 +8,17 @@ module Algs4ruby
       }.join('/')
     end
 
+    # 'quick_find' => 'QuickFind'
+    def modulecase(str)
+      str.to_s.split('_').map(&:capitalize).join('')
+    end
+
     def autoload_modules(*mods)
       mods.each do |mod|
         autoload(mod,  File.expand_path("#{filecase(self)}/#{filecase(mod)}.rb",  File.dirname(__FILE__)) )
       end
     end
+
   end
   extend Helper
 

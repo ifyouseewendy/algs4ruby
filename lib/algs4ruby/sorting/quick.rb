@@ -3,6 +3,8 @@ module Algs4ruby
 
     class Quick < Base
       class << self
+        include Algs4ruby::Helper
+
         # = O(NlgN)
         #
         #   1/3 faster than MergeSort empirically,
@@ -26,83 +28,93 @@ module Algs4ruby
         #   + Exchange median before partition.
 
 
+        # <param>
+        #
+        #   strategy - :default, :three_way
+        #
         def sort(array, strategy = :default, &block)
-          @block = block
-
           array = Shuffling.shuffle(array) # already cloned
 
-          self.class_eval{ extend const_get("Strategy::#{strategy.capitalize}") }
-          recursive_sort(array, 0, array.length-1)
+          klass = Sorting.const_get("QuickBy#{modulecase(strategy)}")
+          klass.sort(array, 0, array.length-1, &block)
 
           array
         end
+
       end
+    end
 
-      module Strategy
-        module Default
-          CUTOFF = 5
+    class QuickByDefault < Quick
+      class << self
+        CUTOFF = 5
 
-          def recursive_sort(array, lo, hi)
-            return if lo >= hi
+        def sort(array, lo, hi, &block)
+          return if lo >= hi
 
-            len = hi - lo + 1
-            return manual_sort(array, lo, hi) if len <= CUTOFF
+          len = hi - lo + 1
+          return manual_sort(array, lo, hi, &block) if len <= CUTOFF
 
-            median = median3_of(array, lo, lo+len/2, hi)
-            exch(array, lo, median)
+          median = median3_of(array, lo, lo+len/2, hi, &block)
+          exch(array, lo, median)
 
-            pivot = partition(array, lo, hi)
+          pivot = partition(array, lo, hi, &block)
 
-            recursive_sort(array, lo, pivot-1)
-            recursive_sort(array, pivot+1, hi)
-          end
-
-          def partition(array, lo, hi)
-            pivot = lo
-            i, j = lo, hi+1
-
-            loop do
-              begin
-                i += 1
-                break if i == hi
-              end while less(array[i], array[pivot])
-
-              begin
-                j -= 1
-                break if j == lo
-              end while less(array[pivot], array[j])
-
-              break if i >= j
-              exch(array, i, j)
-            end
-
-            exch(array, pivot, j)
-
-            return j
-          end
-
-          private
-
-            def manual_sort(array, lo, hi)
-              # Insertion for small arrays.
-              arr = Insertion.sort(array[lo..hi], &@block)
-              (lo..hi).each_with_index{|i,j| array[i] = arr[j] }
-              nil
-            end
-
-            def median3_of(a, i, j, k)
-              if less(a[i], a[j])
-                less(a[j], a[k]) ? j : (less(a[i], a[k]) ? k : i)
-              else
-                less(a[i], a[k]) ? i : (less(a[j], a[k]) ? k : j)
-              end
-            end
+          sort(array, lo, pivot-1, &block)
+          sort(array, pivot+1, hi, &block)
         end
 
-        module EntropyOptimal # Dijkstra 3 way partition
-        end
-      end
+        def partition(array, lo, hi, &block)
+          pivot = lo
+          i, j = lo, hi+1
 
+          loop do
+            begin
+              i += 1
+              break if i == hi
+            end while less(array[i], array[pivot], &block)
+
+            begin
+              j -= 1
+              break if j == lo
+            end while less(array[pivot], array[j], &block)
+
+            break if i >= j
+            exch(array, i, j)
+          end
+
+          exch(array, pivot, j)
+
+          return j
+        end
+
+        private
+
+          def manual_sort(array, lo, hi, &block)
+            # Insertion for small arrays.
+            arr = Insertion.sort(array[lo..hi], &block)
+            (lo..hi).each_with_index{|i,j| array[i] = arr[j] }
+            nil
+          end
+
+          def median3_of(a, i, j, k, &block)
+            if less(a[i], a[j], &block)
+              less(a[j], a[k], &block) ? j : (less(a[i], a[k], &block) ? k : i)
+            else
+              less(a[i], a[k], &block) ? i : (less(a[j], a[k], &block) ? k : j)
+            end
+          end
+      end
+    end
+
+    # It reduces the time of the sort from *linearithmic* to *linear* for arrays
+    # with large numbers of duplicate keys.
+    #
+    # Quicksort with 3-way partitioning uses ~(2ln2)NH compares to sort N items,
+    # where H is the Shannon entropy, defined from the frequencies of key values.
+    #
+    # Worse case:  ~ NlgN, H = lgN when keys are all distinct.
+    # Best  case:  ~ N, if the number ofr distinct keys is constant.
+    module ThreeWay # Entropy-optimal
     end
 
   end
