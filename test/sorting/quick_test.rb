@@ -26,14 +26,27 @@ module Algs4ruby
         assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
       end
 
+      def test_sort_three_way
+        assert_equal @array.sort, Quick.sort(@array, :three_way)
+        assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
+      end
+
       def test_sort_by_specific_order
-        assert_equal @array.sort.reverse, Quick.sort(@array){|a,b| a > b}
+        assert_equal @array.sort.reverse, Quick.sort(@array, :default){|a,b| a > b}
+        assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
+      end
+
+      def test_sort_three_way_by_specific_order
+        assert_equal @array.sort.reverse, Quick.sort(@array, :three_way){|a,b| a > b}
         assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
       end
 
       def test_sort_stability
         refute_equal ['Bryant', 'Dapian', 'Larry', 'Liuwei'],
           Quick.sort(@pairs){|a,b| a.number < b.number }.select{|p| p.number == 8}.map(&:name)
+
+        refute_equal ['Bryant', 'Dapian', 'Larry', 'Liuwei'],
+          Quick.sort(@pairs, :three_way){|a,b| a.number < b.number }.select{|p| p.number == 8}.map(&:name)
       end
     end
   end

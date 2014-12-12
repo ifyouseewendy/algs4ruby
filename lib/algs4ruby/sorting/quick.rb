@@ -63,31 +63,31 @@ module Algs4ruby
           sort(array, pivot+1, hi, &block)
         end
 
-        def partition(array, lo, hi, &block)
-          pivot = lo
-          i, j = lo, hi+1
-
-          loop do
-            begin
-              i += 1
-              break if i == hi
-            end while less(array[i], array[pivot], &block)
-
-            begin
-              j -= 1
-              break if j == lo
-            end while less(array[pivot], array[j], &block)
-
-            break if i >= j
-            exch(array, i, j)
-          end
-
-          exch(array, pivot, j)
-
-          return j
-        end
-
         private
+
+          def partition(array, lo, hi, &block)
+            pivot = lo
+            i, j = lo, hi+1
+
+            loop do
+              begin
+                i += 1
+                break if i == hi
+              end while less(array[i], array[pivot], &block)
+
+              begin
+                j -= 1
+                break if j == lo
+              end while less(array[pivot], array[j], &block)
+
+              break if i >= j
+              exch(array, i, j)
+            end
+
+            exch(array, pivot, j)
+
+            return j
+          end
 
           def manual_sort(array, lo, hi, &block)
             # Insertion for small arrays.
@@ -106,6 +106,10 @@ module Algs4ruby
       end
     end
 
+    # = Entropy Optimal
+    #
+    # by Everywhere Dijkstra
+    #
     # It reduces the time of the sort from *linearithmic* to *linear* for arrays
     # with large numbers of duplicate keys.
     #
@@ -114,7 +118,61 @@ module Algs4ruby
     #
     # Worse case:  ~ NlgN, H = lgN when keys are all distinct.
     # Best  case:  ~ N, if the number ofr distinct keys is constant.
-    module ThreeWay # Entropy-optimal
+    class QuickByThreeWay < Base
+      class << self
+        CUTOFF = 5
+
+        def sort(array, lo, hi, &block)
+          return if lo >= hi
+
+          len = hi - lo + 1
+          return manual_sort(array, lo, hi, &block) if len <= CUTOFF
+
+          median = median3_of(array, lo, lo+len/2, hi, &block)
+          exch(array, lo, median)
+
+          lt, gt = partition(array, lo, hi, &block)
+
+          sort(array, lo, lt-1, &block)
+          sort(array, gt+1, hi, &block)
+        end
+
+        private
+
+          def partition(array, lo, hi, &block)
+            pivot = array[lo]
+            lt, i, gt = lo, lo, hi
+
+            loop do
+              if less(array[i], pivot, &block)
+                exch(array, i, lt); i += 1; lt += 1
+              elsif less(pivot, array[i], &block)
+                exch(array, i, gt); gt -= 1
+              else
+                i += 1
+              end
+
+              break if i > gt
+            end
+
+            return lt, gt
+          end
+
+          def manual_sort(array, lo, hi, &block)
+            # Insertion for small arrays.
+            arr = Insertion.sort(array[lo..hi], &block)
+            (lo..hi).each_with_index{|i,j| array[i] = arr[j] }
+            nil
+          end
+
+          def median3_of(a, i, j, k, &block)
+            if less(a[i], a[j], &block)
+              less(a[j], a[k], &block) ? j : (less(a[i], a[k], &block) ? k : i)
+            else
+              less(a[i], a[k], &block) ? i : (less(a[j], a[k], &block) ? k : j)
+            end
+          end
+      end
     end
 
   end
