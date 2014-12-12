@@ -53,10 +53,21 @@ module Algs4ruby
 
         private
 
-          def less(a, b, &block)
-            if @block
-              @block.call(a,b)
-            elsif block_given?
+          # = Block passing around vs. @block
+          #
+          #   Considering the method chain is getting longer and longer,
+          #   and `less` is the only and final place where block yields,
+          #   I've updated to store a @block, and assign it at the beginning
+          #   of `Quick.sort`. World's clear, but annoying untidy feeling
+          #   blows my mind. Because by using instance varialbles, I can not
+          #   only save the block, but also make an copy of @array, which makes
+          #   all the helper method work without any params.
+          #
+          #   I know it's the OO style to save the state, but writing algorithms
+          #   code is like programming procedure. So I choose to passing the
+          #   annoying block in the end.
+          def less(a, b)
+            if block_given?
               yield(a,b)
             else
               a < b
