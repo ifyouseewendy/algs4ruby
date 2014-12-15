@@ -41,6 +41,15 @@ module Algs4ruby
           array
         end
 
+        # = Select the k-th smallest value
+        #
+        #   Used to find the median.
+        #
+        # = O(N)
+        def select(array, k, strategy = :default, &block)
+          array = Shuffling.shuffle(array) # already cloned
+          QuickByDefault.select(array, k, &block)
+        end
       end
     end
 
@@ -61,6 +70,22 @@ module Algs4ruby
 
           sort(array, lo, pivot-1, &block)
           sort(array, pivot+1, hi, &block)
+        end
+
+        def select(array, k, &block)
+          lo, hi = 0, array.length-1
+          while hi > lo
+            pivot = partition(array, lo, hi, &block)
+            if pivot < k
+              lo = pivot + 1
+            elsif pivot > k
+              hi = pivot - 1
+            else
+              return array[pivot]
+            end
+          end
+
+          return array[lo]
         end
 
         private

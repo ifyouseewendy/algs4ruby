@@ -48,6 +48,17 @@ module Algs4ruby
         refute_equal ['Bryant', 'Dapian', 'Larry', 'Liuwei'],
           Quick.sort(@pairs, :three_way){|a,b| a.number < b.number }.select{|p| p.number == 8}.map(&:name)
       end
+
+      def test_select_median
+        median = @array.length / 2
+        assert_equal @array.sort[median], Quick.select(@array, median)
+      end
+
+      def test_select_median_by_specific_order
+        median = @pairs.length / 2
+        assert_equal @pairs.sort{|a,b| a.name <=> b.name}[median], Quick.select(@pairs, median){|a,b| a.name < b.name}
+      end
+
     end
   end
 end
