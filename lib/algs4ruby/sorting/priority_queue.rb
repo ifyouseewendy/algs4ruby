@@ -1,7 +1,7 @@
 module Algs4ruby
   module Sorting
     class PriorityQueue
-      # Heap-base version
+      # Binary Heap implementation
       def initialize(array = [], &block)
         @num   = array.size
 

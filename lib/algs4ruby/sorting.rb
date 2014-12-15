@@ -11,6 +11,7 @@ module Algs4ruby
         Merge
         Quick
         PriorityQueue
+        Heap
       )
 
     class Base
