@@ -2,22 +2,24 @@ require 'test_helper'
 
 module Algs4ruby
   module Sorting
-    class MaxPQTest < MiniTest::Unit::TestCase
-      class MaxPQ
-        # check if subtree of pq[1..N] rooted at k is a max heap
-        def is_max_heap_at(k)
-          return true if k > size
 
-          left, right = 2*k, 2*k+1
-          return false if [left,right].any?{|i| i < size && less(k, i)}
+    class PriorityQueue
+      # check if subtree of @array[k..-1] is a max heap
+      def is_max_heap_at(k)
+        return true if k > size
 
-          return [left,right].all?{|i| is_max_heap_at(i)}
-        end
+        left, right = 2*k, 2*k+1
+        return false if [left,right].any?{|i| i < size && less(k, i)}
+
+        return [left,right].all?{|i| is_max_heap_at(i)}
       end
+    end
+
+    class PriorityQueueTest < MiniTest::Unit::TestCase
 
       def setup
         @array = [9, 3, 5, 2, 0, 6, 4, 5, 3, 5]
-        @max_pq    = MaxPQ.new
+        @number_pq    = PriorityQueue.new(@array)
 
         people_class = Struct.new(:name, :number, :team)
         @people = [
@@ -31,29 +33,32 @@ module Algs4ruby
           people_class.new('Rose',    1, 'Bulls'),
           people_class.new('Wendi',   3, 'Heat'),
         ]
-        @max_pq_object = MaxPQ.new{|a,b| a.name < b.name }
+        @people_pq = PriorityQueue.new(@people){|a,b| a.name < b.name }
       end
 
       def test_insert
-        @array.each{|item| @max_pq.insert item}
-        assert @max_pq.is_max_heap_at(1)
+        @number_pq.insert(5)
+        assert @number_pq.is_max_heap_at(1)
       end
 
       def test_insert_object
-        @people.each{|item| @max_pq_object.insert item}
-        assert @max_pq_object.is_max_heap_at(1)
+        obj = Object.new
+        def obj.name; 'Dayao'; end
+
+        @people_pq.insert(obj)
+        assert @people_pq.is_max_heap_at(1)
       end
 
       def test_delete_max
         arr = []
-        while !@max_pq.empty?
-          arr << @max_pq.delete_max
+        while !@number_pq.empty?
+          arr << @number_pq.delete_max
         end
-        assert_equal @array.sort.reverse, arr
+        assert_equal @array[1..-1].sort.reverse, arr
       end
 
       def test_delete_max_object
-        assert_equal 'Wendi', @max_pq_object.delete_max.name
+        assert_equal 'Wendi', @people_pq.delete_max.name
       end
 
     end

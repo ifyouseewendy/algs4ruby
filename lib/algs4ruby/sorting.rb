@@ -10,6 +10,7 @@ module Algs4ruby
         Shuffling
         Merge
         Quick
+        PriorityQueue
       )
 
     class Base
