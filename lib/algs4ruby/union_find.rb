@@ -14,7 +14,7 @@ module Algs4ruby
       :weighted_quick_union,
       :weighted_quick_union_with_path_compression
     ]
-    DEFAULT_STRATEGY = [:weighted_quick_union_with_path_compression]
+    DEFAULT_STRATEGY = :weighted_quick_union_with_path_compression
 
     attr_reader :core
 
