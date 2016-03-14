@@ -30,6 +30,8 @@ module Algs4ruby
           ids[rq] = rp
           update_weight(rp, rq)
         end
+
+        nil
       end
 
       def connected?(p, q)

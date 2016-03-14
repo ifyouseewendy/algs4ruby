@@ -12,6 +12,8 @@ module Algs4ruby
         ids.each_index do |i|
           ids[i] = qid if ids[i] == pid
         end
+
+        nil
       end
 
       def connected?(p, q)

@@ -16,9 +16,10 @@ module Algs4ruby
     ]
     DEFAULT_STRATEGY = :weighted_quick_union_with_path_compression
 
-    attr_reader :core
+    attr_reader :core, :strategy
 
     def initialize(n, strategy: DEFAULT_STRATEGY)
+      @strategy = strategy
       @core = classify(strategy).new(n)
     end
 
