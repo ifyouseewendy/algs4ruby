@@ -1,5 +1,5 @@
 module Algs4ruby
-  module UnionFind
+  class UnionFind
     class QuickFind < Base
       ##
       # O(N^2), to process N union commands on N objects.
@@ -8,14 +8,14 @@ module Algs4ruby
       #         N     N     1
 
       def union(p, q)
-        pid, qid = @id[p], @id[q]
-        @id.each_index do |i|
-          @id[i] = qid if @id[i] == pid
+        pid, qid = ids[p], ids[q]
+        ids.each_index do |i|
+          ids[i] = qid if ids[i] == pid
         end
       end
 
       def connected?(p, q)
-        @id[p] == @id[q]
+        ids[p] == ids[q]
       end
     end
   end

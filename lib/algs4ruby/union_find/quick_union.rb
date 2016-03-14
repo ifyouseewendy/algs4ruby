@@ -1,5 +1,5 @@
 module Algs4ruby
-  module UnionFind
+  class UnionFind
     class QuickUnion < Base
       ##
       # O(N^2), to process N union commands on N objects.
@@ -8,7 +8,7 @@ module Algs4ruby
       #         N     N     N
 
       def union(p, q)
-        @id[p] = root(q)
+        ids[p] = root(q)
       end
 
       def connected?(p, q)
@@ -18,16 +18,16 @@ module Algs4ruby
       private
 
         def root(i)
-          while i != @id[i]
-            i = @id[i]
+          while i != ids[i]
+            i = ids[i]
           end
           i
         end
 
         def to_s
           [
-            (0...@id.count).to_a.join(' '),
-            @id.join(' ')
+            (0...ids.count).to_a.join(' '),
+            ids.join(' ')
           ].join("\n")
         end
     end

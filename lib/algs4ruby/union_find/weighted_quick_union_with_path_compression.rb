@@ -1,5 +1,5 @@
 module Algs4ruby
-  module UnionFind
+  class UnionFind
     class WeightedQuickUnionWithPathCompression < Base
       ##
       # O(NlgN), to process N union commands on N objects.
@@ -15,7 +15,7 @@ module Algs4ruby
       #   set the id of each examined node to point to that root.
 
       def initialize(n, strategy = :size)
-        @id       = Array.new(n){|i| i}
+        super(n)
         @weight   = Array.new(n, 0)
         @strategy = strategy
       end
@@ -24,10 +24,10 @@ module Algs4ruby
         rp, rq = root(p), root(q)
         return if rp == rq
         if @weight[rp] < @weight[rq]
-          @id[rp] = rq
+          ids[rp] = rq
           update_weight(rq, rp)
         else
-          @id[rq] = rp
+          ids[rq] = rp
           update_weight(rp, rq)
         end
       end
@@ -39,9 +39,9 @@ module Algs4ruby
       private
 
         def root(i)
-          while i != @id[i]
-            @id[i] = @id[ @id[i] ] # Path Compression
-            i = @id[i]
+          while i != ids[i]
+            ids[i] = ids[ ids[i] ] # Path Compression
+            i = ids[i]
           end
           i
         end
@@ -59,8 +59,8 @@ module Algs4ruby
 
         def to_s
           [
-            (0...@id.count).to_a.join(' '),
-            @id.join(' ')
+            (0...ids.count).to_a.join(' '),
+            ids.join(' ')
           ].join("\n")
         end
     end
