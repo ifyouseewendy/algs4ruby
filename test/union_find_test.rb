@@ -7,11 +7,11 @@ module Algs4ruby
     STRATEGY = [:quick_find, :quick_union, :weighted_quick_union, :weighted_quick_union_with_path_compression]
 
     def setup
-      count = DATA.readline.strip.to_i
+      num, round = DATA.readline.strip.split.map(&:to_i)
 
-      @sets = STRATEGY.map {|strategy| UnionFind.new(count, strategy: strategy) }
+      @sets = STRATEGY.map {|strategy| UnionFind.new(num, strategy: strategy) }
 
-      count.times do
+      round.times do
         p, q = DATA.readline.strip.split.map(&:to_i)
         @sets.each{|set| set.union(p,q) }
       end
@@ -28,15 +28,12 @@ module Algs4ruby
 end
 
 __END__
-10
+10 8
 4 3
 3 8
 6 5
 9 4
 2 1
-8 9
 5 0
 7 2
 6 1
-1 0
-6 7
