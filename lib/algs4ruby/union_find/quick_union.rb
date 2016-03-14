@@ -8,7 +8,10 @@ module Algs4ruby
       #         N     N     N
 
       def union(p, q)
-        ids[p] = root(q)
+        i = root(p)
+        j = root(q)
+        ids[i] = j
+        nil
       end
 
       def connected?(p, q)
