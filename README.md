@@ -1,29 +1,34 @@
 # Algs4ruby
 
-TODO: Write a gem description
+Algorithms implemented by Ruby, while reading [Algorithms 4th Edition](http://algs4.cs.princeton.edu/home/) and [Algorithms on Coursera](https://class.coursera.org/algs4partI-010/)
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'algs4ruby'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install algs4ruby
+```sh
+gem install 'algs4ruby'
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Check algorithms which current support
 
-## Contributing
+```ruby
+require 'algs4ruby'
 
-1. Fork it ( http://github.com/<my-github-username>/algs4ruby/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Algs4ruby::Support #=> [:UnionFind]
+```
+
+## Specification
+
++ UnionFind ([README](/lib/algs4ruby/union_find/README.md), [Example](/example/union_find.rb))
+
+## Changelog
+
+*v0.1.0*
+
++ Add UnionFind
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+

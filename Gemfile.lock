@@ -1,7 +1,6 @@
 PATH
   remote: .
   specs:
-    algs4ruby (0.0.1)
 
 GEM
   remote: https://rubygems.org/
