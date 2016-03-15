@@ -6,3 +6,5 @@ begin
   require 'minitest/focus'
 rescue LoadError
 end
+
+require 'sorting/sorting_test_helper'
