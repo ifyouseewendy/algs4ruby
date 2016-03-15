@@ -1,11 +1,14 @@
 require 'test_helper'
 
 module Algs4ruby
-  module Sorting
+  class Sorting
     class InsertionTest < MiniTest::Unit::TestCase
+      attr_reader :array, :origin_array, :pairs
+
       def setup
         # 10.times.reduce([]){|ar, i| ar << rand(10) }.join(', ')
         @array = [9, 3, 5, 2, 0, 6, 4, 5, 3, 5]
+        @origin_array = @array
 
         people_class = Struct.new(:name, :number, :team)
         @pairs = [
@@ -22,19 +25,26 @@ module Algs4ruby
       end
 
       def test_sort
-        assert_equal @array.sort, Insertion.sort(@array)
-        assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
+        expected = array.sort
+        assert_equal expected, Sorting.new(:insertion).sort(array)
+        assert_equal origin_array, array
+      end
+
+      def test_sort!
+        expected = array.sort
+        assert_nil Sorting.new(:insertion).sort!(array)
+        assert_equal expected, array
       end
 
       def test_sort_by_specific_order
-        assert_equal @array.sort.reverse, Insertion.sort(@array){|a,b| a > b}
-        assert_equal [9, 3, 5, 2, 0, 6, 4, 5, 3, 5], @array
+        assert_equal array.sort.reverse, Sorting.new(:insertion).sort(array){|a,b| a > b}
       end
 
       def test_sort_stability
         assert_equal ['Bryant', 'Dapian', 'Larry', 'Liuwei'],
-          Insertion.sort(@pairs){|a,b| a.number < b.number }.select{|p| p.number == 8}.map(&:name)
+          Sorting.new(:insertion).sort(pairs){|a,b| a.number < b.number }.select{|p| p.number == 8}.map(&:name)
       end
+
     end
   end
 end
