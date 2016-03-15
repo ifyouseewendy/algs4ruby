@@ -1,10 +1,10 @@
 require_relative 'sorting/base'
 require_relative 'sorting/insertion'
+require_relative 'sorting/selection'
 # require_relative 'sorting/heap'
 # require_relative 'sorting/merge'
 # require_relative 'sorting/priority_queue'
 # require_relative 'sorting/quick'
-# require_relative 'sorting/selection'
 # require_relative 'sorting/shell'
 # require_relative 'sorting/shuffling'
 
@@ -13,7 +13,8 @@ module Algs4ruby
     include Helper
 
     STRATEGIES = [
-      :insertion
+      :insertion,
+      :selection
     ]
 
     DEFAULT_STRATEGY = :insertion
