@@ -4,12 +4,10 @@ module Algs4ruby
   class UnionFindTest < MiniTest::Unit::TestCase
     attr_reader :sets
 
-    STRATEGY = [:quick_find, :quick_union, :weighted_quick_union, :weighted_quick_union_with_path_compression]
-
     def setup
       num, round = DATA.readline.strip.split.map(&:to_i)
 
-      @sets = STRATEGY.map {|strategy| UnionFind.new(num, strategy: strategy) }
+      @sets = UnionFind::STRATEGIES.map {|strategy| UnionFind.new(num, strategy: strategy) }
 
       round.times do
         p, q = DATA.readline.strip.split.map(&:to_i)
