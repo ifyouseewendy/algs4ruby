@@ -4,12 +4,12 @@
 
 name        | inplace?  | stable? | worst   | average | best    | remarks
 -------     | --------  | ------- | -----   | ------- | ----    | -------
-selection   | ✔         |         | N^2 / 2 | N^2 / 2 | N^2 / 2 | N exchanges
-insertion   | ✔         | ✔       | N^2 / 2 | N^2 / 4 | N       | use for small N or partially ordered
+selection   | ✔         |         | N^2/2   | N^2/2   | N^2/2   | N exchanges
+insertion   | ✔         | ✔       | N^2/2   | N^2/4   | N       | use for small N or partially ordered
 shell       | ✔         |         | ?       | ?       | N       | tight code, subquadratic
 merge       |           | ✔       | NlgN    | NlgN    | NlgN    | NlgN guarantee, stable
-quick       | ✔         |         | N^2 / 2 | 2NlnN   | NlgN    | NlgN probabilistic guarantee, fastest in practice
-3-way quick | ✔         |         | N^2 / 2 | 2NlnN   | N       | improves quicksort in presence of duplicate keys
+quick       | ✔         |         | N^2/2   | 2NlnN   | NlgN    | NlgN probabilistic guarantee, fastest in practice
+3-way quick | ✔         |         | N^2/2   | 2NlnN   | N       | improves quicksort in presence of duplicate keys
 ???         | ✔         | ✔       | NlgN    | NlgN    | N       | holy sorting grail
 
 ## Elementary Sorts
@@ -34,6 +34,8 @@ Invariants:
 + Entries the left of i (include i) fixed and in ascending order.
 + No entry to right of i is smaller than any entry to the left of i.
 
+![selection_sort](image/selection_sort.png)
+
 #### Insertion Sort
 
 Algorithm: Scans from left to right
@@ -43,6 +45,8 @@ Invariants:
 + Entries to the left of i (include i) fixed and in ascending order.
 + Entries to the right of i have not yet been seen.
 
+![insertion_sort](image/insertion_sort.png)
+
 **Inversion**
 
 Def. An inversion is a pair of keys that are out of order.
@@ -51,6 +55,8 @@ Def. An inversion is a pair of keys that are out of order.
 + Proposition. For partially-sorted arrays, insertion sort runs in linear time.
 + Pf. Number of exchanges equals the number of inversions.
 
+![inversion](image/inversion.png)
+
 #### Shell Sort
 
 > idea: reduce the inversions
@@ -58,6 +64,8 @@ Def. An inversion is a pair of keys that are out of order.
 + Move entries more than one poisition at a time by **h-sorting** the array.
 + Knuth's incremental sequence is `3x+1`.
 + Example of simple idea leading to substantial performace gains.
+
+![shell_sort](image/shell_sort.png)
 
 #### Knuth Shuffle
 
@@ -75,6 +83,8 @@ Algorithm
 + Divide array into two halves.
 + Recursively sort each half.
 + Merge two halves.
+
+![merge_sort](image/merge_sort.png)
 
 Improvements
 
@@ -99,6 +109,8 @@ Algorithm
   - no smaller entry to the right of j
 + Sort each piece recursively
 
+![quick_sort](image/quick_sort.png)
+
 Improvements
 
 + Cutoff to insertion sort for ~ 10 items. (Has too much overhead for tiny subarrays)
@@ -114,10 +126,11 @@ Algorithm
 + Repeat in one subarray, depending on comparison with j.
 + Finish when j equals k.
 
+![quick_select](image/quick_select.png)
+
 **Duplicate Keys**
 
-> Entropy-optimal sorting
-> Dutch national flag problem
+> Entropy-optimal sorting && Dutch national flag problem
 
 Algorithm: Dijkstra 3-way partition
 
@@ -159,3 +172,9 @@ Algorithm: Graham Scan
 + Choose point p with smallest y-coordinate.
 + Sort points by polar angle with p.
 + Consider points in order; discard unless it create a ccw turn.
+
+![convex_hull](image/convex_hull.png)
+
+Q. How to check a CCW turn
+
+![ccw](image/ccw.png)
