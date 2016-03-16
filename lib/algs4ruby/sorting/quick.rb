@@ -30,7 +30,7 @@ module Algs4ruby
       #
       #   strategy - :default, :three_way
       #
-      def sort(array, strategy = :default, &block)
+      def sort(array, strategy = :three_way, &block)
         array = Shuffling.new.sort(array) # already cloned
 
         klass = Sorting.const_get("QuickBy#{modulecase(strategy)}")

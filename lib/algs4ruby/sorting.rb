@@ -20,12 +20,12 @@ module Algs4ruby
       :quick
     ]
 
-    DEFAULT_STRATEGY = :insertion
+    DEFAULT_STRATEGY = :quick
 
     attr_reader :core, :strategy
 
-    def initialize(strategy)
-      @strategy = strategy || DEFAULT_STRATEGY
+    def initialize(strategy = DEFAULT_STRATEGY)
+      @strategy = strategy
       @core     = classify(@strategy).new
     end
 
