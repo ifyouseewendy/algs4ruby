@@ -3,7 +3,7 @@ module Algs4ruby
     class Shell < Base
       # = O(N^1.5)
       #
-      #   UsingKnuth's Increment Sequence, 3N+1
+      #   Using Knuth's Increment Sequence, 3N+1
       #
       # = Not stable
 
