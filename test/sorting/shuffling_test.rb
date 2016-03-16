@@ -1,19 +1,24 @@
 require 'test_helper'
 
 module Algs4ruby
-  module Sorting
-    class ShufflingTest < MiniTest::Unit::TestCase
+  class Sorting
+    class ShufflingTest < MiniTest::Test
+      attr_reader :sorting, :array, :origin_array
+
       def setup
-        # 10.times.reduce([]){|ar, i| ar << rand(10) }.join(', ')
-        @array = (1..10).to_a
+        @sorting      = Sorting.new(:shuffling)
+        @array        = (1..10).to_a
+        @origin_array = @array
       end
 
-      def test_shuffle
-        refute_equal @array.sort, Shuffling.shuffle(@array)
+      def test_sort
+        refute_equal @array.sort, sorting.sort(@array)
+        assert_equal @array.sort, @array
       end
 
-      def test_shuffle_by_sort
-        refute_equal @array.sort, Shuffling.shuffle(@array, :sort)
+      def test_sort!
+        refute_equal @array.sort, sorting.sort!(@array)
+        refute_equal @array.sort, @array
       end
     end
   end

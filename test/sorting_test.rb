@@ -5,10 +5,9 @@ module Algs4ruby
     attr_reader :sortings, :array, :origin_array, :pairs
 
     def setup
-      @sortings = Sorting::STRATEGIES.map{|strategy| Sorting.new(strategy)}
+      @sortings     = Sorting::STRATEGIES.map{|strategy| Sorting.new(strategy)}
 
-      # 10.times.reduce([]){|ar, i| ar << rand(10) }.join(', ')
-      @array = [9, 3, 5, 2, 0, 6, 4, 5, 3, 5]
+      @array        = [9, 3, 5, 2, 0, 6, 4, 5, 3, 5]
       @origin_array = @array
     end
 
