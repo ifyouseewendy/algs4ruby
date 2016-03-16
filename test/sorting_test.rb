@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Algs4ruby
-  class SortingTest < MiniTest::Unit::TestCase
+  class SortingTest < MiniTest::Test
     attr_reader :sortings, :array, :origin_array, :pairs
 
     def setup
