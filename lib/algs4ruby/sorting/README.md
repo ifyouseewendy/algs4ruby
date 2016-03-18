@@ -161,7 +161,7 @@ API
 + Compelte binary tree - Perfectly balanced, except for bottom level. (Property. Height of complete tree with N nodes is lg N)
 + Binary heap - Array representation of a heap-ordered complete binary tree.
 
-![binary_heap](binary_heap.png)
+![binary_heap](image/binary_heap.png)
 
 Property
 
@@ -177,8 +177,8 @@ API
 + `insert(v)`. Add node at end, and swim it up.
 + `delete_max()` . Exchange root with node at end, sink it down.
 
-![binary_heap_swim](binary_heap_swim.png)
-![binary_heap_sink](binary_heap_sink.png)
+![binary_heap_swim](image/binary_heap_swim.png)
+![binary_heap_sink](image/binary_heap_sink.png)
 
 Consideration
 
