@@ -7,9 +7,10 @@ name        | inplace?  | stable? | worst   | average | best    | remarks
 selection   | ✔         |         | N^2/2   | N^2/2   | N^2/2   | N exchanges
 insertion   | ✔         | ✔       | N^2/2   | N^2/4   | N       | use for small N or partially ordered
 shell       | ✔         |         | ?       | ?       | N       | tight code, subquadratic
-merge       |           | ✔       | NlgN    | NlgN    | NlgN    | NlgN guarantee, stable
 quick       | ✔         |         | N^2/2   | 2NlnN   | NlgN    | NlgN probabilistic guarantee, fastest in practice
 3-way quick | ✔         |         | N^2/2   | 2NlnN   | N       | improves quicksort in presence of duplicate keys
+merge       |           | ✔       | NlgN    | NlgN    | NlgN    | NlgN guarantee, stable
+heap        | ✔         |         | 2NlgN   | 2NlgN   | NlgN    | NlgN guarantee, in-place
 ???         | ✔         | ✔       | NlgN    | NlgN    | N       | holy sorting grail
 
 ## Elementary Sorts
@@ -187,6 +188,36 @@ Consideration
 + Other operations.
   - Remove an arbitrary item.
   - Change the priority of an item.
+
+**Heap Sort**
+
+Using the Binary Heap data structure.
+
++ Build map heap using bottom-up method.
++ Repeatedly delete the largest remaining item.
+
+```ruby
+for (int k = N/2; k >= 1; k--)
+  sink(a, k, N);
+
+while (N > 1)
+{
+  exch(a, 1, N--);
+  sink(a, 1, N);
+}
+```
+
+Significance. In-place sorting algorithm with N log N worst-case.
+
++ Mergesort: no, linear extra space.
++ Quicksort: no, quadratic time in worst case.
++ Heapsort: yes!
+
+Bottom line. Heapsort is optimal for both time and space, but:
+
++ Inner loop longer than quicksort’s.
++ Makes poor use of cache memory.
++ Not stable.
 
 ## Application
 
