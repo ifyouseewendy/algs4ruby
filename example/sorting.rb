@@ -33,3 +33,10 @@ sorting = Algs4ruby::Sorting::Quick.new
 
 sorting.select(array, 3) # => 2
 sorting.select(array, 7) # => 8
+
+# Priority Queue (Binary Heap Implementation)
+array = data.clone
+pq = Algs4ruby::Sorting::PriorityQueue.new(array)
+pq.delete_max # => 9
+pq.delete_max # => 8
+
