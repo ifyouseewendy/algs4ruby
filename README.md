@@ -15,18 +15,23 @@ Check algorithms which current support
 ```ruby
 require 'algs4ruby'
 
-Algs4ruby::Support #=> [:UnionFind]
+Algs4ruby::Support #=> [:UnionFind, :Sorting]
 ```
 
 ## Specification
 
 + UnionFind ([README](/lib/algs4ruby/union_find/README.md), [Example](/example/union_find.rb))
++ Sorting ([README](/lib/algs4ruby/sorting/README.md), [Example](/example/sorting.rb))
 
 ## Changelog
 
 *v0.1.0*
 
 + Add UnionFind
+
+*v0.2.0*
+
++ Add Sorting
 
 ## License
 

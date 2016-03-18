@@ -1,4 +1,4 @@
 module Algs4ruby
-  VERSION = "0.1.0"
-  Support = [:UnionFind]
+  VERSION = "0.2.0"
+  Support = [:UnionFind, :Sorting]
 end
