@@ -5,8 +5,8 @@ require_relative 'sorting/shell'
 require_relative 'sorting/shuffling'
 require_relative 'sorting/merge'
 require_relative 'sorting/quick'
+require_relative 'sorting/priority_queue'
 # require_relative 'sorting/heap'
-# require_relative 'sorting/priority_queue'
 
 module Algs4ruby
   class Sorting

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Algs4ruby
-  module Sorting
+  class Sorting
 
     class PriorityQueue
       # check if subtree of @array[k..-1] is a max heap
@@ -16,6 +16,8 @@ module Algs4ruby
     end
 
     class PriorityQueueTest < MiniTest::Unit::TestCase
+
+      attr_reader :array, :number_pq, :people_pq
 
       def setup
         @array = [9, 3, 5, 2, 0, 6, 4, 5, 3, 5]
@@ -37,28 +39,28 @@ module Algs4ruby
       end
 
       def test_insert
-        @number_pq.insert(5)
-        assert @number_pq.is_max_heap_at(1)
+        number_pq.insert(5)
+        assert number_pq.is_max_heap_at(1)
       end
 
       def test_insert_object
         obj = Object.new
         def obj.name; 'Dayao'; end
 
-        @people_pq.insert(obj)
-        assert @people_pq.is_max_heap_at(1)
+        people_pq.insert(obj)
+        assert people_pq.is_max_heap_at(1)
       end
 
       def test_delete_max
         arr = []
-        while !@number_pq.empty?
-          arr << @number_pq.delete_max
+        while !number_pq.empty?
+          arr << number_pq.delete_max
         end
-        assert_equal @array[1..-1].sort.reverse, arr
+        assert_equal array.sort.reverse, arr
       end
 
       def test_delete_max_object
-        assert_equal 'Wendi', @people_pq.delete_max.name
+        assert_equal 'Wendi', people_pq.delete_max.name
       end
 
     end
