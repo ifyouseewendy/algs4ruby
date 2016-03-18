@@ -147,6 +147,47 @@ Algorithm: Dijkstra 3-way partition
 
 > [Algorithms - 2.4 Priority Queues](http://algs4.cs.princeton.edu/24pq)
 
+
+API
+
++ `initialize(arr)` create a priority queue with given keys
++ `insert(v)`
++ `delete_max()` return and remove the max/min key
+
+**Binary Heap**
+
++ Binary tree - Empty or node with links to left and right binary trees.
++ Compelte binary tree - Perfectly balanced, except for bottom level. (Property. Height of complete tree with N nodes is lg N)
++ Binary heap - Array representation of a heap-ordered complete binary tree.
+
+![binary_heap](binary_heap.png)
+
+Property
+
++ Largest key is a[1], which is root of binary tree.
++ Can use array indices to move through tree. (Indices start at 1)
+  - Parent of node at k is at k/2.
+  - Children of node at k are at 2k and 2k+1.
+
+API
+
++ `swim(k)`, promotion. Child's key becomes larger key than its parent's key.
++ `sink(k)`, demotion. Parent's key becomes smaller than one (or both) of its children's.
++ `insert(v)`. Add node at end, and swim it up.
++ `delete_max()` . Exchange root with node at end, sink it down.
+
+![binary_heap_swim](binary_heap_swim.png)
+![binary_heap_sink](binary_heap_sink.png)
+
+Consideration
+
++ Immutability of keys. Better use immutable keys.
++ Underflow and overflow. Throw exception if deleting from empty PQ.
++ Minimum-oriented priority queue. Replace `less()` with `greater()`
++ Other operations.
+  - Remove an arbitrary item.
+  - Change the priority of an item.
+
 ## Application
 
 #### System sorts
