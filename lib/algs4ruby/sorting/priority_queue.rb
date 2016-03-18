@@ -12,7 +12,7 @@ module Algs4ruby
 
         @block = block || ->(a,b){ a < b }
 
-        (@num/2).downto(1).each{|i| sink(i) }
+        construct
       end
 
       def insert(item)
@@ -40,6 +40,10 @@ module Algs4ruby
       end
 
       private
+
+        def construct
+          (num/2).downto(1).each{|i| sink(i) }
+        end
 
         def swim(k)
           while k > 1 && less(k/2, k)

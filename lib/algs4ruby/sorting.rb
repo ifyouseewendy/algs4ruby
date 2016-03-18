@@ -6,7 +6,7 @@ require_relative 'sorting/shuffling'
 require_relative 'sorting/merge'
 require_relative 'sorting/quick'
 require_relative 'sorting/priority_queue'
-# require_relative 'sorting/heap'
+require_relative 'sorting/heap'
 
 module Algs4ruby
   class Sorting
@@ -17,7 +17,8 @@ module Algs4ruby
       :selection,
       :shell,
       :merge,
-      :quick
+      :quick,
+      :heap
     ]
 
     DEFAULT_STRATEGY = :quick
