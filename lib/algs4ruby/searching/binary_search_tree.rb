@@ -21,9 +21,6 @@ module Algs4ruby
         recursive_get(root, key)
       end
 
-      def delete(key)
-      end
-
       def keys
         traverse
       end
@@ -80,9 +77,11 @@ module Algs4ruby
       end
 
       def delete_min
+        self.root = recursive_delete_min(root)
       end
 
       def delete_max
+        self.root = recursive_delete_max(root)
       end
 
       def delete(key)
@@ -182,6 +181,24 @@ module Algs4ruby
           else
             node.key
           end
+        end
+
+        def recursive_delete_min(node)
+          return node.right if node.left.nil?
+
+          node.left = recursive_delete_min(node.left)
+          node.size = size_of(node.left) + 1 + size_of(node.right)
+
+          return node
+        end
+
+        def recursive_delete_max(node)
+          return node.left if node.right.nil?
+
+          node.right = recursive_delete_max(node.right)
+          node.size = size_of(node.left) + 1 + size_of(node.right)
+
+          return node
         end
     end
   end

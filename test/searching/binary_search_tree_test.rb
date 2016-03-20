@@ -76,6 +76,17 @@ module Algs4ruby
         assert_equal 'A', bst.select(0)
         assert_equal 'S', bst.select(8)
       end
+
+      def test_delete_min
+        bst.delete_min
+        assert_equal data.uniq.sort[1..-1], bst.keys
+      end
+
+      focus
+      def test_delete_max
+        bst.delete_max
+        assert_equal data.uniq.sort[0..-2], bst.keys
+      end
     end
   end
 end
