@@ -25,7 +25,11 @@ module Algs4ruby
       end
 
       def keys
-        recursive_keys(root)
+        traverse
+      end
+
+      def traverse(order: :inorder)
+        recursive_traverse(root, order)
       end
 
       def contains?(key)
@@ -114,9 +118,17 @@ module Algs4ruby
           end
         end
 
-        def recursive_keys(node)
+        def recursive_traverse(node, order)
           return [] if node.nil?
-          recursive_keys(node.left) + [node.key] + recursive_keys(node.right)
+
+          case order
+          when :inorder
+            recursive_traverse(node.left, order) + [node.key] + recursive_traverse(node.right, order)
+          when :preorder
+            [node.key] + recursive_traverse(node.left, order) + recursive_traverse(node.right, order)
+          when :postorder
+            recursive_traverse(node.left, order) + recursive_traverse(node.right, order) + [node.key]
+          end
         end
 
         def recursive_floor(node, key)
