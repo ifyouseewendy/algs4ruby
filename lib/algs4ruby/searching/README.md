@@ -80,4 +80,79 @@ Besides basic APIs, there are:
 + `void deleteMax()`
 + `Iterable<Key> iterator()`
 
+There are some Balanced Search Trees help to improve performace.
 
++ 2-3 Search Tree
++ Red-black BST
++ B-Tree
+
+## 2-3 Search Tree
+
+Allow 1 or 2 keys per node.
+
++ 2-node: one key, two children
++ 3-node: two keys, three children
+
+![2-3_tree.png](image/2-3_tree.png)
+
+**Invariants**
+
+Maintains symmetric order and perfect balance.
+
++ Symmetric order. Inorder traversal yields keys in ascending order.
++ Perfect balance. Every path from root to null link has same length.
+
+**Insertion**
+
++ Travere finding the right place.
++ Insertion into a 2-node, make it a 3-node.
++ Insertion into a 3-node at bottom.
+  - Add new key to 3-node to create temporary 4-node.
+  - Move middle key in 4-node into parent.
+  - Repeat up the tree, as necessary.
+  - If you reach the root and it's a 4-node, split it into three 2-nodes.
+
+![2-3_tree_insertion.png](image/2-3_tree_insertion.png)
+
+**Performance**
+
+![2-3_tree_performance.png](image/2-3_tree_performance.png)
+
+## Left-Leaning Red-Black BST
+
+> Guibas-Sedgewick 1979 and Sedgewick 2007
+
++ Represent 2–3 tree as a BST.
++ Use "internal" left-leaning links as "glue" for 3–nodes.
+
+**Invariants**
+
++ No node has two red links connected to it.
++ Every path from root to null link has the same number of black links. (perfect black balance)
++ Red links lean left.
+
+**1–1 correspondence between 2–3 and LL**
+
+![llrb.png](image/llrb.png)
+
+**Elementary Operations**
+
++ `rotate_left(node)`
++ `rotate_right(node)`
++ `flip_colors(node)`
+
+**Insertion**
+
+Several insertion situations, like insert into a 2-node, 3-node. Below is a really complicated one.
+
+![llrb_insertion.png](image/llrb_insertion.png)
+
+**What's most amazing?!**
+
+We can have the same code for all cases.
+
+![llrb_implementation.png](image/llrb_implementation.png)
+
+**Performance**
+
+![llrb_performance.png](image/llrb_performance.png)
