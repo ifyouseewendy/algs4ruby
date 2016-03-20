@@ -250,3 +250,21 @@ Algorithm: Graham Scan
 Q. How to check a CCW turn
 
 ![ccw](image/ccw.png)
+
+#### Quick Sort Easy Partition
+
+> [Quicksort In-Place](https://www.hackerrank.com/challenges/quicksort3) on HackerRank
+
++ Use [Lomuto Partition](http://en.wikipedia.org/wiki/Quicksort#Algorithm).
+
+```
+algorithm partition(A, lo, hi) is
+    pivot := A[hi]
+    i := lo        // place for swapping
+    for j := lo to hi – 1 do
+        if A[j] ≤ pivot then
+            swap A[i] with A[j]
+            i := i + 1
+    swap A[i] with A[hi]
+    return i
+```
