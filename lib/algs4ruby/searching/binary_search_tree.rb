@@ -42,21 +42,11 @@ module Algs4ruby
       end
 
       def min
-        node = root
-
-        loop do
-          return node.key if node.left.nil?
-          node = node.left
-        end
+        recursive_min(root)
       end
 
       def max
-        node = root
-
-        loop do
-          return node.key if node.right.nil?
-          node = node.right
-        end
+        recursive_max(root)
       end
 
       def floor(key)
@@ -128,6 +118,16 @@ module Algs4ruby
           when :postorder
             recursive_traverse(node.left, order) + recursive_traverse(node.right, order) + [node.key]
           end
+        end
+
+        def recursive_min(node)
+          return node if node.left.nil?
+          recursive_min(node.left)
+        end
+
+        def recursive_max(node)
+          return node if node.right.nil?
+          recursive_max(node.right)
         end
 
         def recursive_floor(node, key)

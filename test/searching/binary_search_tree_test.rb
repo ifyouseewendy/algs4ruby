@@ -44,11 +44,11 @@ module Algs4ruby
       end
 
       def test_min
-        assert_equal 'A', bst.min
+        assert_equal 'A', bst.min.key
       end
 
       def test_max
-        assert_equal 'X', bst.max
+        assert_equal 'X', bst.max.key
       end
 
       def test_floor
