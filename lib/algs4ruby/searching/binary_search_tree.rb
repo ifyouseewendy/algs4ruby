@@ -177,7 +177,7 @@ module Algs4ruby
           if left_size > k
             recursive_select(node.left, k)
           elsif left_size < k
-            recursive_select(node, k-left_size-1)
+            recursive_select(node.right, k-left_size-1)
           else
             node.key
           end
