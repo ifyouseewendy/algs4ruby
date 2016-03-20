@@ -57,16 +57,18 @@ module Algs4ruby
         end
       end
 
+      def floor(key)
+        recursive_floor(root, key)
+      end
+
+      def ceiling(key)
+        recursive_ceiling(root, key)
+      end
+
       def delete_min
       end
 
       def delete_max
-      end
-
-      def floor(key)
-      end
-
-      def ceiling(key)
       end
 
       def delete(key)
@@ -109,6 +111,30 @@ module Algs4ruby
         def recursive_keys(node)
           return [] if node.nil?
           recursive_keys(node.left) + [node.key] + recursive_keys(node.right)
+        end
+
+        def recursive_floor(node, key)
+          return if node.nil?
+
+          if key == node.key
+            return key
+          elsif key < node.key
+            recursive_floor(node.left, key)
+          elsif key > node.key
+            recursive_floor(node.right, key) || node.key
+          end
+        end
+
+        def recursive_ceiling(node, key)
+          return if node.nil?
+
+          if key == node.key
+            return key
+          elsif key < node.key
+            recursive_ceiling(node.left, key) || node.key
+          elsif key > node.key
+            recursive_ceiling(node.right, key)
+          end
         end
     end
   end

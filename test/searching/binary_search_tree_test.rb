@@ -41,9 +41,17 @@ module Algs4ruby
         assert_equal 'A', bst.min
       end
 
-      focus
       def test_max
         assert_equal 'X', bst.max
+      end
+
+      def test_floor
+        assert_equal 'E', bst.floor('G')
+        assert_equal 'C', bst.floor('D')
+      end
+
+      def test_ceiling
+        assert_equal 'R', bst.ceiling('Q')
       end
     end
   end
