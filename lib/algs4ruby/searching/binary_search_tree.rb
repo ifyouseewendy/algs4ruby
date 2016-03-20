@@ -33,7 +33,7 @@ module Algs4ruby
       end
 
       def size
-        root&.size || 0
+        size_of(root)
       end
 
       def empty?
@@ -66,6 +66,14 @@ module Algs4ruby
         recursive_ceiling(root, key)
       end
 
+      # How many keys < key?
+      def rank(key)
+        recursive_rank(root, key)
+      end
+
+      def select(k)
+      end
+
       def delete_min
       end
 
@@ -73,12 +81,6 @@ module Algs4ruby
       end
 
       def delete(key)
-      end
-
-      def rank(key)
-      end
-
-      def select(k)
       end
 
       private
@@ -94,7 +96,7 @@ module Algs4ruby
             node.value = value
           end
 
-          node.size = 1 + node.left&.size.to_i + node.right&.size.to_i
+          node.size = size_of(node)
 
           return node
         end
@@ -137,6 +139,24 @@ module Algs4ruby
             recursive_ceiling(node.left, key) || node.key
           elsif key > node.key
             recursive_ceiling(node.right, key)
+          end
+        end
+
+        def size_of(node)
+          return 0 if node.nil?
+
+          size_of(node.left) + 1 + size_of(node.right)
+        end
+
+        def recursive_rank(node, key)
+          return 0 if node.nil?
+
+          if key < node.key
+            recursive_rank(node.left, key)
+          elsif key > node.key
+            size_of(node.left) + 1 + recursive_rank(node.right, key)
+          else
+            size_of(node.left)
           end
         end
     end

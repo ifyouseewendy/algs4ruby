@@ -15,6 +15,7 @@ module Algs4ruby
       end
 
       def test_get
+        require'pry';binding.pry
         assert_equal 0, bst.get('S')
         assert_equal 8, bst.get('A')
         assert_equal nil, bst.get('Z')
@@ -58,9 +59,12 @@ module Algs4ruby
         assert_equal data.uniq.count, bst.size
       end
 
-      focus
       def test_empty?
         refute bst.empty?
+      end
+
+      def test_rank
+        assert_equal 8, bst.rank('S')
       end
     end
   end
