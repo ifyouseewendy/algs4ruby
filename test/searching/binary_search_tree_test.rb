@@ -28,14 +28,22 @@ module Algs4ruby
         bst.put('A', 8) # restore
       end
 
-      def test_delete
-        # assert_equal 'A', bst.get('A')
-        # bst.delete('A')
-        # assert_equal nil, bst.get('A')
-      end
-
       def test_keys
         assert_equal data.uniq.sort, bst.keys
+      end
+
+      def test_contains?
+        assert bst.contains?('A')
+        refute bst.contains?('Z')
+      end
+
+      def test_min
+        assert_equal 'A', bst.min
+      end
+
+      focus
+      def test_max
+        assert_equal 'X', bst.max
       end
     end
   end

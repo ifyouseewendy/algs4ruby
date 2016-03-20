@@ -3,7 +3,13 @@ module Algs4ruby
     class BinarySearchTree
       attr_accessor :root
 
-      def initialize
+      class Node
+        attr_accessor :key, :value, :left, :right
+
+        def initialize(key, value)
+          @key   = key
+          @value = value
+        end
       end
 
       def put(key, value)
@@ -12,6 +18,13 @@ module Algs4ruby
 
       def get(key)
         recursive_get(root, key)
+      end
+
+      def delete(key)
+      end
+
+      def keys
+        recursive_keys(root)
       end
 
       def contains?(key)
@@ -27,9 +40,21 @@ module Algs4ruby
       end
 
       def min
+        node = root
+
+        loop do
+          return node.key if node.left.nil?
+          node = node.left
+        end
       end
 
       def max
+        node = root
+
+        loop do
+          return node.key if node.right.nil?
+          node = node.right
+        end
       end
 
       def delete_min
@@ -51,19 +76,6 @@ module Algs4ruby
       end
 
       def select(k)
-      end
-
-      def keys
-        recursive_keys(root)
-      end
-
-      class Node
-        attr_accessor :key, :value, :left, :right
-
-        def initialize(key, value)
-          @key   = key
-          @value = value
-        end
       end
 
       private
@@ -98,8 +110,6 @@ module Algs4ruby
           return [] if node.nil?
           recursive_keys(node.left) + [node.key] + recursive_keys(node.right)
         end
-
-
     end
   end
 end
