@@ -72,6 +72,7 @@ module Algs4ruby
       end
 
       def select(k)
+        recursive_select(root, k)
       end
 
       def delete_min
@@ -157,6 +158,17 @@ module Algs4ruby
             size_of(node.left) + 1 + recursive_rank(node.right, key)
           else
             size_of(node.left)
+          end
+        end
+
+        def recursive_select(node, k)
+          left_size = size_of(node.left)
+          if left_size > k
+            recursive_select(node.left, k)
+          elsif left_size < k
+            recursive_select(node, k-left_size-1)
+          else
+            node.key
           end
         end
     end

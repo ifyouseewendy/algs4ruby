@@ -15,7 +15,6 @@ module Algs4ruby
       end
 
       def test_get
-        require'pry';binding.pry
         assert_equal 0, bst.get('S')
         assert_equal 8, bst.get('A')
         assert_equal nil, bst.get('Z')
@@ -65,6 +64,11 @@ module Algs4ruby
 
       def test_rank
         assert_equal 8, bst.rank('S')
+      end
+
+      def test_select
+        assert_equal 'A', bst.select(0)
+        assert_equal 'S', bst.select(8)
       end
     end
   end
