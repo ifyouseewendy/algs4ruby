@@ -8,3 +8,4 @@ rescue LoadError
 end
 
 require 'sorting/sorting_test_helper'
+require 'searching/bst_test_helper'
