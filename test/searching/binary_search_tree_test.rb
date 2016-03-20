@@ -82,10 +82,16 @@ module Algs4ruby
         assert_equal data.uniq.sort[1..-1], bst.keys
       end
 
-      focus
       def test_delete_max
         bst.delete_max
         assert_equal data.uniq.sort[0..-2], bst.keys
+      end
+
+      def test_delete
+        bst.delete('A')
+        assert_equal (data.uniq - ['A']).sort, bst.keys
+        bst.delete('E')
+        assert_equal (data.uniq - ['A', 'E']).sort, bst.keys
       end
     end
   end

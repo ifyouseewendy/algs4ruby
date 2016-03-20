@@ -9,7 +9,6 @@ module Algs4ruby
         def initialize(key, value)
           @key   = key
           @value = value
-          @size = 1
         end
       end
 
@@ -75,6 +74,7 @@ module Algs4ruby
       end
 
       def delete(key)
+        self.root = recursive_delete(root, key)
       end
 
       private
@@ -198,6 +198,29 @@ module Algs4ruby
           node.right = recursive_delete_max(node.right)
           node.size = size_of(node.left) + 1 + size_of(node.right)
 
+          return node
+        end
+
+        # Hibbard deletion
+        def recursive_delete(node, key)
+          return nil if node.nil?
+
+          if key < node.key
+            node.left = recursive_delete(node.left, key)
+          elsif key > node.key
+            node.right = recursive_delete(node.right, key)
+          else
+            return node.right if node.left.nil?
+            return node.left  if node.right.nil?
+
+            successor       = recursive_min(node.right)
+            successor.right = recursive_delete_min(node.right)
+            successor.left  = node.left
+
+            node = successor
+          end
+
+          node.size = size_of(node.left) + 1 + size_of(node.right)
           return node
         end
     end
