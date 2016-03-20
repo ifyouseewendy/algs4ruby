@@ -53,6 +53,15 @@ module Algs4ruby
       def test_ceiling
         assert_equal 'R', bst.ceiling('Q')
       end
+
+      def test_size
+        assert_equal data.uniq.count, bst.size
+      end
+
+      focus
+      def test_empty?
+        refute bst.empty?
+      end
     end
   end
 end

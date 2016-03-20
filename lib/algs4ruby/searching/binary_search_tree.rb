@@ -4,11 +4,12 @@ module Algs4ruby
       attr_accessor :root
 
       class Node
-        attr_accessor :key, :value, :left, :right
+        attr_accessor :key, :value, :left, :right, :size
 
         def initialize(key, value)
           @key   = key
           @value = value
+          @size = 1
         end
       end
 
@@ -92,6 +93,8 @@ module Algs4ruby
           else
             node.value = value
           end
+
+          node.size = 1 + node.left&.size.to_i + node.right&.size.to_i
 
           return node
         end
