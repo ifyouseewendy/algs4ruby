@@ -54,6 +54,14 @@ Besides basic APIs, there are:
 
 ![symbol_table_ordered_example.png](image/symbol_table_ordered_example.png)
 
+**Application**
+
++ Set
++ Dictionary Client
++ Index Client
++ Sparse Vector
+
+![symbol_table_sparse_vector.png](image/symbol_table_sparse_vector.png)
 
 ## Binary Search Tree
 
