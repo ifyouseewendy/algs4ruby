@@ -156,3 +156,34 @@ We can have the same code for all cases.
 **Performance**
 
 ![llrb_performance.png](image/llrb_performance.png)
+
+## B-Tree
+
+Generalize 2-3 trees by allowing up to M - 1 key-link pairs per node.
+
++ At least 2 key-link pairs at root.
++ At least M / 2 key-link pairs in other nodes.
++ External nodes contain client keys.
++ Internal nodes contain copies of keys to guide search.
+
+![b_tree.png](image/b_tree.png)
+
+**Search**
+
++ Start at root.
++ Find interval for search key and take corresponding link.
++ Search terminates in external node.
+
+![b_tree_search.png](image/b_tree_search.png)
+
+**Insertion**
+
++ Search for new key.
++ Insert at bottom.
++ Split nodes with M key-link pairs on the way up the tree.
+
+![b_tree_insert.png](image/b_tree_insert.png)
+
+**Performance**
+
+![b_tree_performance.png](image/b_tree_performance.png)
