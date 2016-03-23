@@ -341,3 +341,42 @@ Sweep vertical line from left to right.
 **Performance**
 
 The sweep-line algorithm takes time proportional to N log N + R to find all R intersections among N orthogonal line segments.
+
+## 1d Interval Search
+
+Data structure to hold set of (overlapping) intervals.
+
++ Insert an interval ( lo, hi ).
++ Search for an interval ( lo, hi ).
++ Delete an interval ( lo, hi ).
++ Interval intersection query: given an interval ( lo, hi ), find all intervals (or one interval) in data structure that intersects ( lo, hi ).
+
+Nondegeneracy assumption. No two intervals have the same left endpoint.
+
+**Insert**
+
+To insert an interval ( lo, hi ) :
+
++ Insert into BST, using lo as the key.
++ Update max in each node on search path.
+
+![interval_search_tree_insert.png](image/interval_search_tree_insert.png)
+
+**Search**
+
+To search for any one interval that intersects query interval ( lo, hi ) :
+
++ If interval in node intersects query interval, return it.
++ Else if left subtree is null, go right.
++ Else if max endpoint in left subtree is less than lo, go right.
++ Else go left.
+
+![interval_search_tree_search.png](image/interval_search_tree_search.png)
+
+**Performance**
+
+Use a red-black BST to guarantee performance.
+
+![interval_search_tree_performance.png](image/interval_search_tree_performance.png)
+
+
