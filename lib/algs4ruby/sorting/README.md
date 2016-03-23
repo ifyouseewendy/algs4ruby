@@ -143,6 +143,13 @@ Algorithm: Dijkstra 3-way partition
 
 ![three_way_partition](image/three_way_partition.png)
 
+## Counting Sort
+
+> Counting sort is a sorting technique based on keys between a specific range
+
+Most sorting algorithms are comparison sorts, i.e. they sort a list just by comparing the elements to one another. A comparison sort algorithm cannot beat n×log(n)n×log(n) (worst-case) running time, since n×log(n)n×log(n) represents the minimum number of comparisons needed to know where to place each element.
+
+However, for certain types of input, it is more efficient to use a non-comparison sorting algorithm. This will make it possible to sort lists even in linear time. These challenges will cover Counting Sort, a fast way to sort lists where the elements have a **small number of possible values**, such as integers within a certain range.
 
 ## Priority Queues
 
