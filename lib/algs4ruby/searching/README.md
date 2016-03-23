@@ -318,3 +318,26 @@ Extension of ordered symbol table.
   - Recursively find all keys in right subtree (if any could fall in range).
 
 ![bst_1d_range_search.png](image/bst_1d_range_search.png)
+
+### Orthogonal Line segment Intersection
+
+Given N horizontal and vertical line segments, find all intersections.
+
+![bst_line_segment_intersection.png](image/bst_line_segment_intersection.png)
+
+**Sweep-line Algorithm**
+
+Sweep line reduces 2d orthogonal line segment intersection search to 1d range search.
+
+Sweep vertical line from left to right.
+
++ x-coordinates define events.
++ h-segment (left endpoint): insert y-coordinate into BST.
++ h-segment (right endpoint): remove y-coordinate from BST.
++ v-segment: range search for interval of y-endpoints.
+
+![bst_line_segment_intersection_sweep_line.png](image/bst_line_segment_intersection_sweep_line.png)
+
+**Performance**
+
+The sweep-line algorithm takes time proportional to N log N + R to find all R intersections among N orthogonal line segments.
