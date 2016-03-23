@@ -295,3 +295,26 @@ Cuckoo hashing. (linear-probing variant)
 
 + Hash key to two positions; insert key into either position; if occupied, reinsert displaced key into its alternative position (and recur).
 + Constant worst case time for search.
+
+## Geometric Applications of BSTs
+
++ 1d Range Search
+
+### 1d Range Search
+
+> Database queries.
+
+Extension of ordered symbol table.
+
++ 1d Range count: number of keys between k1 and k2.
++ 1d Range search: find all keys between k1 and k2.
+
+**API**
+
++ `size_in_range(lo, hi)`
++ `keys_in_range(lo, hi)`
+  - Recursively find all keys in left subtree (if any could fall in range).
+  - Check key in current node.
+  - Recursively find all keys in right subtree (if any could fall in range).
+
+![bst_1d_range_search.png](image/bst_1d_range_search.png)
