@@ -95,6 +95,16 @@ module Algs4ruby
         bst.delete('E')
         assert_equal (data.uniq - ['A', 'E']).sort, bst.keys
       end
+
+      def test_size_in_range
+        assert_equal 3, bst.size_in_range('A', 'F')
+        assert_equal 7, bst.size_in_range('E', 'S')
+      end
+
+      def test_keys_in_range
+        assert_equal ['A', 'C', 'E'], bst.keys_in_range('A', 'F')
+        assert_equal ['E', 'H', 'L', 'M', 'P', 'R', 'S'], bst.keys_in_range('E', 'S')
+      end
     end
   end
 end

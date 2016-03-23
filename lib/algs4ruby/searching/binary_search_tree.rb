@@ -77,6 +77,17 @@ module Algs4ruby
         self.root = recursive_delete(root, key)
       end
 
+      def size_in_range(lo, hi)
+        sum = rank(hi) - rank(lo)
+        sum += 1 if contains?(hi)
+
+        sum
+      end
+
+      def keys_in_range(lo, hi)
+        recursive_keys_in_range(root, lo, hi)
+      end
+
       private
 
         def recursive_put(node, key, value)
@@ -223,6 +234,19 @@ module Algs4ruby
           node.size = size_of(node.left) + 1 + size_of(node.right)
           return node
         end
+
+        def recursive_keys_in_range(node, lo, hi)
+          return [] if node.nil?
+
+          if node.key < lo
+            recursive_keys_in_range(node.right, lo, hi)
+          elsif node.key >= lo && node.key <= hi
+            recursive_keys_in_range(node.left, lo, hi) + [node.key] + recursive_keys_in_range(node.right, lo, hi)
+          elsif node.key > hi
+            recursive_keys_in_range(node.left, lo, hi)
+          end
+        end
+
     end
   end
 end
