@@ -30,9 +30,13 @@ module Algs4ruby
       end
 
       def test_delete
-        assert_equal 1,   bst.get(4, 8)
-        bst.delete(4, 8)
-        assert_equal nil, bst.get(4, 8)
+        assert_equal 3,   bst.get(7, 10)
+        assert_equal 10,  bst.root.left.value.max_endpoint
+
+        bst.delete(7, 10)
+
+        assert_equal nil, bst.get(7, 10)
+        assert_equal 8,  bst.root.left.value.max_endpoint
       end
 
       def test_intersects

@@ -1,6 +1,10 @@
 module Algs4ruby
   class Searching
     class IntervalSearchTree < RedBlackBST
+      # Precondition
+      #
+      #  No two intervals have the same left endpoint.
+
       Value = Struct.new(:hi, :max_endpoint, :value)
 
       def put(lo, hi, value)
@@ -41,9 +45,7 @@ module Algs4ruby
           flip_colors(node)         if is_red?(node.left)  && is_red?(node.right)
 
           node.size = size_of(node)
-
-          # Store max endpoint in subtree rooted at node.
-          node.value.max_endpoint = [node.left, node.right].reject(&:nil?).map{|nd| nd.value.max_endpoint}.max
+          update_max_end_point!(node)
 
           return node
         end
@@ -58,6 +60,35 @@ module Algs4ruby
           else
             return node.value
           end
+        end
+
+        def recursive_delete(node, key)
+          return nil if node.nil?
+
+          if key < node.key
+            node.left = recursive_delete(node.left, key)
+          elsif key > node.key
+            node.right = recursive_delete(node.right, key)
+          else
+            return node.right if node.left.nil?
+            return node.left  if node.right.nil?
+
+            successor       = recursive_min(node.right)
+            successor.right = recursive_delete_min(node.right)
+            successor.left  = node.left
+
+            node = successor
+          end
+
+          node.size = size_of(node.left) + 1 + size_of(node.right)
+          update_max_end_point!(node)
+
+          return node
+        end
+
+        def update_max_end_point!(node)
+          # Store max endpoint in subtree rooted at node.
+          node.value.max_endpoint = [node.left, node.right].reject(&:nil?).map{|nd| nd.value.max_endpoint}.max
         end
 
         def recursive_intersects(node, lo, hi)
