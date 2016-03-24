@@ -36,7 +36,7 @@ Associative array abstraction. Associate one value with each key.
 **Ordered symbol table**
 
 + Sequential search in a linked list
-+ Binary search in an ordered array 
++ Binary search in an ordered array
 + Binary search tree
 
 ![symbol_table_binary_search.png](image/symbol_table_binary_search.png)
@@ -275,8 +275,6 @@ Conclusion
 + M too small -> search time blows up.
 + Typical choice: α = N / M ~ 1⁄2. # probes for search hit is about 32, probes for search miss is about 5/2
 
-![hash_table_summary.png](image/hash_table_summary.png)
-
 **Hashing Variants**
 
 Two-probe hashing. (separate-chaining variant)
@@ -298,7 +296,7 @@ Cuckoo hashing. (linear-probing variant)
 
 ## Geometric Applications of BSTs
 
-+ 1d Range Search
+![bst_geometry_application.png](image/bst_geometry_application.png)
 
 ### 1d Range Search
 
@@ -342,7 +340,89 @@ Sweep vertical line from left to right.
 
 The sweep-line algorithm takes time proportional to N log N + R to find all R intersections among N orthogonal line segments.
 
-## 1d Interval Search
+### kd Range Serach
+
+**2-d orthogonal range search**
+
+Extension of ordered symbol-table to 2d keys.
+
++ Insert a 2d key.
++ Delete a 2d key.
++ Search for a 2d key.
++ Range search: find all keys that lie in a 2d range.
++ Range count: number of keys that lie in a 2d range.
+
+**Grid Implementation**
+
++ Divide space into M-by-M grid of squares.
++ Create list of points contained in each square.
++ Use 2d array to directly index relevant square.
++ Insert: add (x, y) to list for corresponding square.
++ Range search: examine only squares that intersect 2d range query.
+
+![2d_range_search_grid.png](image/2d_range_search_grid.png)
+
+*Problem*
+
+Fast, simple solution for evenly-distributed points. But Clustering a well-known phenomenon in geometric data.
+
++ Lists are too long, even though average length is short.
++ Need data structure that adapts gracefully to data.
+
+**Space-partitioning Tree**
+
+Use a tree to represent a recursive subdivision of 2d space.
+
+![space_partitioning_tree.png](image/space_partitioning_tree.png)
+
+**2d Tree**
+
+*Data Structure*
+
+BST, but alternate using x- and y-coordinates as key.
+
++ Search gives rectangle containing point.
++ Insert further subdivides the plane.
+
+![2d_tree_data_structure.png](image/2d_tree_data_structure.png)
+
+*Search*
+
+Find all points in a query axis-aligned rectangle.
+
++ Check if point in node lies in given rectangle.
++ Recursively search left/bottom (if any could fall in rectangle).
++ Recursively search right/top (if any could fall in rectangle).
+
+![2d_tree_search.png](image/2d_tree_search.png)
+
+Performance
+
++ Typical case. R + log N.
++ Worst case (assuming tree is balanced). R + √N.
+
+*Nearest Neighbor Search*
+
++ Check distance from point in node to query point.
++ Recursively search left/bottom (if it could contain a closer point).
++ Recursively search right/top (if it could contain a closer point).
++ Organize method so that it begins by searching for query point.
+
+![2d_tree_neighbor_search.png](image/2d_tree_neighbor_search.png)
+
+Performance
+
++ Typical case. log N.
++ Worst case (even if tree is balanced). N.
+
+**Kd Tree**
+
++ Recursively partition k-dimensional space into 2 halfspaces.
++ BST, but cycle through dimensions ala 2d trees.
+
+![kd_tree.png](image/kd_tree.png)
+
+### 1d Interval Search
 
 Data structure to hold set of (overlapping) intervals.
 
@@ -379,4 +459,24 @@ Use a red-black BST to guarantee performance.
 
 ![interval_search_tree_performance.png](image/interval_search_tree_performance.png)
 
+### Orthogonal rectangle intersection
+
+Find all intersections among a set of N orthogonal rectangles.
+
+**Sweep-line Algorithm**
+
+Sweep line reduces 2d orthogonal rectangle intersection search to 1d interval search.
+
+Sweep vertical line from left to right.
+
++ x-coordinates of left and right endpoints define events.
++ Maintain set of rectangles that intersect the sweep line in an interval search tree (using y-intervals of rectangle).
++ Left endpoint: interval search for y-interval of rectangle; insert y-interval.
++ Right endpoint: remove y-interval.
+
+![bst_rectangle_intersection_sweep_line.png](image/bst_rectangle_intersection_sweep_line.png)
+
+**Performance**
+
+Sweep line algorithm takes time proportional to N log N + R log N to find R intersections among a set of N rectangles.
 

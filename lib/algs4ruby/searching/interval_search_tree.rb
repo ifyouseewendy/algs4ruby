@@ -91,6 +91,7 @@ module Algs4ruby
           node.value.max_endpoint = [node.left, node.right].reject(&:nil?).map{|nd| nd.value.max_endpoint}.max
         end
 
+        # Need to ensure, for finding all the intersections
         def recursive_intersects(node, lo, hi)
           result = []
           return result if node.nil?
