@@ -92,17 +92,22 @@ module Algs4ruby
         end
 
         def recursive_intersects(node, lo, hi)
-          return nil if node.nil?
+          result = []
+          return result if node.nil?
+
+          if node.left && node.left.value.max_endpoint >= lo
+            result += recursive_intersects(node.left, lo, hi)
+          end
 
           if intersected?(node, lo, hi)
-            return [node.key, node.value.hi]
-          elsif node.left.nil?
-            recursive_intersects(node.right, lo, hi)
-          elsif node.left.value.max_endpoint < lo
-            recursive_intersects(node.right, lo, hi)
-          else
-            recursive_intersects(node.left, lo, hi)
+            result += [node.key, node.value.hi]
           end
+
+          unless hi < node.key
+            result += recursive_intersects(node.right, lo, hi)
+          end
+
+          result
         end
 
         def intersected?(node, lo, hi)

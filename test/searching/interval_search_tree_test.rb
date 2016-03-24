@@ -40,8 +40,10 @@ module Algs4ruby
       end
 
       def test_intersects
-        assert_equal [21, 24], bst.intersects(21, 23)
-        assert_equal [15, 18], bst.intersects(1, 23)
+        assert_equal [4, 8, 5, 8, 7, 10, 15, 18, 17, 19, 21, 24], bst.intersects(1, 23)
+
+        bst.put(16, 22, 7)
+        assert_equal [16, 22, 21, 24], bst.intersects(21, 23)
       end
     end
   end
