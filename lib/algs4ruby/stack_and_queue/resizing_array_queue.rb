@@ -1,81 +1,68 @@
-class ResizingArrayQueue
-  def initialize(count)
-    @head = @tail = 0
-    @stack = Array.new(count)
-  end
+module Algs4ruby
+  class Queue
+    class ResizingArray
+      attr_accessor :head, :tail, :array, :size
 
-  def enqueue(item)
-    @stack[@tail] = item
-
-    @tail += 1
-    resize(2*@stack.length) if valid_count == @stack.length
-
-    @tail %= capacity
-    return
-  end
-
-  def dequeue
-    item = @stack[@head]
-
-    @head += 1
-    resize(@stack.length/2) if valid_count == @stack.length/4 && valid_count != 0
-
-    @head %= capacity
-    return item
-  end
-
-  def valid_count
-    count = @tail - @head
-    count += capacity if count < 0
-    count
-  end
-
-  def capacity
-    @stack.length
-  end
-
-  def empty?
-    valid_count == 0
-  end
-
-  def next_pos_of(num)
-    (num+1) % capacity
-  end
-
-  private
-
-    def resize(count)
-      # puts "--> Resized. before: #{@stack.length}, after: #{count}"
-
-      # Really trick resize logic
-      @stack = Array.new(count) do |i|
-        if @head > @tail
-          (@head + i <= @tail + capacity) ? @stack[ @head+i ] : nil
-        else
-          (@head + i <= @tail) ? @stack[ @head+i ] : nil
-        end
+      def initialize(capacity = 2)
+        @head = @tail = 0
+        @array = Array.new(capacity)
+        @size = 0
       end
 
-      @tail = ( @tail - @head ) % capacity
-      @head = 0
+      def enq(item)
+        resize(2*array.length) if size == array.length
 
-      return
-    end
+        array[tail] = item
+        self.tail   = next_pos_of(tail)
+        self.size  += 1
 
-  class << self
-    def test
-      sio = StringIO.new("to be or not to - be - - that - - - is - a - - question -")
-      stack = self.new(2)
-
-      sio.readline.split.each do |item|
-        if item == '-'
-          puts stack.dequeue
-        else
-          stack.enqueue item
-        end
+        nil
       end
 
-      return
+      def deq
+        raise 'Deq on empty queue' if empty?
+
+        resize(array.length/2) if size == array.length/4 && size.nonzero?
+
+        item        = array[head]
+        self.head   = next_pos_of(head)
+        self.size  -= 1
+
+        return item
+      end
+
+      def empty?
+        size.zero?
+      end
+
+      private
+
+        def next_pos_of(num)
+          (num+1) % array.length
+        end
+
+        def resize(capacity)
+          # puts "--> Resized. before: #{@array.length}, after: #{capacity}"
+
+          new_array = Array.new(capacity)
+          idx       = 0
+
+          pos   = head
+          count = size
+
+          count.times do
+            new_array[idx] = array[pos]
+            idx += 1
+            pos = next_pos_of(pos)
+          end
+
+          self.head  = 0
+          self.tail  = count
+          self.array = new_array
+
+          nil
+        end
+
     end
   end
 end

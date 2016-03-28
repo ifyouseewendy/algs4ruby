@@ -1,48 +1,44 @@
-class LinkedQueue
-  Node = Struct.new(:item, :pointer)
+module Algs4ruby
+  class Queue
+    class LinkedList
+      Node = Struct.new(:item, :next)
 
-  def initialize
-  end
+      attr_accessor :first, :last, :size
 
-  def enqueue(item)
-    old_last = @last
-    @last = Node.new(item, nil)
-
-    if empty?
-      @first = @last
-    else
-      old_last.pointer = @last
-    end
-  end
-
-  def dequeue
-    raise 'EmptyQueue' if @first.nil?
-
-    item = @first.item
-    @first = @first.pointer
-    @last = nil if empty?
-
-    return item
-  end
-
-  def empty?
-    @first == nil
-  end
-
-  class << self
-    def test
-      sio = StringIO.new("to be or not to - be - - that - - - is - a - - question -")
-      stack = self.new
-
-      sio.readline.split.each do |item|
-        if item == '-'
-          puts stack.dequeue
-        else
-          stack.enqueue item
-        end
+      def initialize
+        @size = 0
       end
 
-      return
+      def enq(item)
+        old_last  = last
+        self.last = Node.new(item, nil)
+
+        if empty?
+          self.first = last
+        else
+          old_last.next = last
+        end
+
+        self.size += 1
+
+        nil
+      end
+
+      def deq
+        raise 'Deq on empty queue' if empty?
+
+        item        = first.item
+        self.first  = first.next
+        self.last   = nil if empty?
+        self.size  -= 1
+
+        return item
+      end
+
+      def empty?
+        first == nil
+      end
+
     end
   end
 end
