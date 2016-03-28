@@ -1,5 +1,0 @@
-require_relative 'stack_and_queue/fixed_capacity_stack'
-require_relative 'stack_and_queue/linked_queue'
-require_relative 'stack_and_queue/linked_stack'
-require_relative 'stack_and_queue/resizing_array_queue'
-require_relative 'stack_and_queue/resizing_array_stack'
