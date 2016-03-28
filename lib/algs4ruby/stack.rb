@@ -1,6 +1,6 @@
 require 'forwardable'
-require_relative 'stack/linked_stack'
-require_relative 'stack/resizing_array_stack'
+require_relative 'stack/linked_list'
+require_relative 'stack/resizing_array'
 
 # require_relative 'stack_and_queue/resizing_array_queue'
 # require_relative 'stack_and_queue/linked_queue'
@@ -12,10 +12,10 @@ module Algs4ruby
 
     STRATEGIES = [
       :linked_list,
-      # :resizing_array
+      :resizing_array
     ]
 
-    # DEFAULT_STRATEGY = :resizing_array
+    DEFAULT_STRATEGY = :resizing_array
 
     attr_reader :core, :strategy
 

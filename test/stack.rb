@@ -20,6 +20,12 @@ module Algs4ruby
       end
     end
 
+    def test_empty
+      stacks.each do |stack|
+        assert stack.empty?
+      end
+    end
+
     def test_push_and_pop
       stacks.each do |stack|
         expected = 'to be or not to be that is'
@@ -40,7 +46,7 @@ module Algs4ruby
 
     def test_empty_pop
       stacks.each do |stack|
-        assert_equal 0, stack.size
+        assert stack.empty?
         assert_raises RuntimeError, 'Pop on empty stack' do
           stack.pop
         end
