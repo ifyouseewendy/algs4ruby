@@ -58,6 +58,6 @@ end
 require_relative 'algs4ruby/version'
 require_relative 'algs4ruby/union_find'
 require_relative 'algs4ruby/sorting'
-require_relative 'algs4ruby/stack'
+require_relative 'algs4ruby/stack_and_queue'
 require_relative 'algs4ruby/graph'
 require_relative 'algs4ruby/searching'

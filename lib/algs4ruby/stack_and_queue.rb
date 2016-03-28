@@ -1,9 +1,8 @@
 require 'forwardable'
-require_relative 'stack/linked_list'
-require_relative 'stack/resizing_array'
-
+require_relative 'stack_and_queue/linked_list_stack'
+require_relative 'stack_and_queue/resizing_array_stack'
+# require_relative 'stack_and_queue/linked_list_queue'
 # require_relative 'stack_and_queue/resizing_array_queue'
-# require_relative 'stack_and_queue/linked_queue'
 
 module Algs4ruby
   class Stack
