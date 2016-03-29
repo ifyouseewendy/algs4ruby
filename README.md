@@ -15,13 +15,15 @@ Check algorithms which current support
 ```ruby
 require 'algs4ruby'
 
-Algs4ruby::Support #=> [:UnionFind, :Sorting]
+Algs4ruby::Support #=> [:UnionFind, :Sorting, :Searching, :Stack, :Queue]
 ```
 
 ## Specification
 
 + UnionFind ([README](/lib/algs4ruby/union_find/README.md), [Example](/example/union_find.rb))
 + Sorting ([README](/lib/algs4ruby/sorting/README.md), [Example](/example/sorting.rb))
++ Searching ([README](/lib/algs4ruby/searching/README.md), [Example](/example/searching.rb))
++ Stack and Queue ([README](/lib/algs4ruby/stack_and_queue/README.md), [Example](/example/stack_and_queue.rb))
 
 ## Changelog
 
@@ -47,6 +49,11 @@ Algs4ruby::Support #=> [:UnionFind, :Sorting]
   - BinarySearchTree
   - RedBlackBST
   - IntervalSearchTree
+
+*v0.4.0*
+
++ Stack
++ Queue
 
 ## License
 
