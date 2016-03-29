@@ -10,11 +10,20 @@ Gem::Specification.new do |spec|
   spec.email         = ["ifyouseewendy@gmail.com"]
   spec.summary       = %q{Algorithms implemented by Ruby}
   spec.description   = <<-HERE
-+ Graph
-  - (Di)graph
-  - DFS, BFS
-  - Topological Sort
-  - (Strong) Connected Component
++ UnionFind
++ Sorting
+  - Insertion
+  - Selection
+  - Shell
+  - Shuffling
+  - Merge
+  - Quick
+  - PriorityQueue
+  - Heap
++ Searching
+  - BinarySearchTree
+  - RedBlackBST
+  - IntervalSearchTree
   HERE
   spec.homepage      = ""
   spec.license       = "MIT"

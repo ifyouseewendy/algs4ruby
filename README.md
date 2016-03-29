@@ -32,6 +32,21 @@ Algs4ruby::Support #=> [:UnionFind, :Sorting]
 *v0.2.0*
 
 + Add Sorting
+  - Insertion
+  - Selection
+  - Shell
+  - Shuffling
+  - Merge
+  - Quick
+  - PriorityQueue
+  - Heap
+
+*v0.3.0*
+
++ Add Searching
+  - BinarySearchTree
+  - RedBlackBST
+  - IntervalSearchTree
 
 ## License
 
