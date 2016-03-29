@@ -1,6 +1,8 @@
 module Algs4ruby
   class Queue
     class ResizingArray
+      include Enumerable
+
       attr_accessor :head, :tail, :array, :size
 
       def initialize(capacity = 2)
@@ -33,6 +35,16 @@ module Algs4ruby
 
       def empty?
         size.zero?
+      end
+
+      def each
+        return to_enum(:each) unless block_given?
+
+        pos = head
+        size.times do
+          yield array[pos]
+          pos = next_pos_of(pos)
+        end
       end
 
       private

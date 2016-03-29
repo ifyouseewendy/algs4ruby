@@ -52,6 +52,16 @@ module Algs4ruby
         end
       end
     end
+
+    def test_enumerable
+      items = %w(to be or not to be that is)
+
+      queues.each do |queue|
+        items.each{|item| queue.enq(item) }
+
+        assert_equal items, queue.map.to_a
+      end
+    end
   end
 end
 

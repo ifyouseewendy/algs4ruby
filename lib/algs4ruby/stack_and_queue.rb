@@ -36,15 +36,17 @@ module Algs4ruby
       :resizing_array
     ]
 
-    # DEFAULT_STRATEGY = :resizing_array
+    DEFAULT_STRATEGY = :resizing_array
 
     attr_reader :core, :strategy
-
-    def_delegators :core, :enq, :deq, :empty?, :size
 
     def initialize(strategy = DEFAULT_STRATEGY)
       @strategy = strategy
       @core     = classify(@strategy).new
+    end
+
+    def method_missing(m, *args, &block)
+      core.public_send(m, *args, &block)
     end
   end
 end
