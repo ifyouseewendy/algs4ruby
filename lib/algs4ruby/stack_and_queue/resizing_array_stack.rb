@@ -1,6 +1,8 @@
 module Algs4ruby
   class Stack
     class ResizingArray
+      include Enumerable
+
       attr_accessor :size, :array
 
       def initialize(capacity = 2)
@@ -30,6 +32,16 @@ module Algs4ruby
 
       def empty?
         size.zero?
+      end
+
+      def each
+        return to_enum(:each) unless block_given?
+
+        pos = size - 1
+        while pos >= 0
+          yield array[pos]
+          pos -= 1
+        end
       end
 
       private

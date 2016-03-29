@@ -52,6 +52,16 @@ module Algs4ruby
         end
       end
     end
+
+    def test_enumerable
+      items = %w(to be or not to be that is)
+
+      stacks.each do |stack|
+        items.each{|item| stack.push(item) }
+
+        assert_equal items.reverse, stack.map.to_a
+      end
+    end
   end
 end
 

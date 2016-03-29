@@ -1,4 +1,3 @@
-require 'forwardable'
 require_relative 'stack_and_queue/linked_list_stack'
 require_relative 'stack_and_queue/resizing_array_stack'
 require_relative 'stack_and_queue/linked_list_queue'
@@ -18,11 +17,13 @@ module Algs4ruby
 
     attr_reader :core, :strategy
 
-    def_delegators :core, :push, :pop, :empty?, :size
-
     def initialize(strategy = DEFAULT_STRATEGY)
       @strategy = strategy
       @core     = classify(@strategy).new
+    end
+
+    def method_missing(m, *args, &block)
+      core.public_send(m, *args, &block)
     end
   end
 

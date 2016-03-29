@@ -1,6 +1,8 @@
 module Algs4ruby
   class Stack
     class LinkedList
+      include Enumerable
+
       Node = Struct.new(:item, :next)
 
       attr_accessor :first, :size
@@ -28,6 +30,16 @@ module Algs4ruby
 
       def empty?
         first.nil?
+      end
+
+      def each
+        return to_enum(:each) unless block_given?
+
+        pointer = first
+        size.times do
+          yield pointer.item
+          pointer = pointer.next
+        end
       end
 
     end
