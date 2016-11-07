@@ -22,6 +22,8 @@ module Algs4ruby
       end
 
       def delete_max
+        return nil if num == 0
+
         max = array[1]
 
         exch(1, num)
