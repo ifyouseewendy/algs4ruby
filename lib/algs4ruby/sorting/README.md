@@ -1,3 +1,18 @@
+  * [Sorting](#sorting)
+    * [Elementary Sorts](#elementary-sorts)
+        * [Selection Sort](#selection-sort)
+        * [Insertion Sort](#insertion-sort)
+        * [Shell Sort](#shell-sort)
+        * [Knuth Shuffle](#knuth-shuffle)
+    * [Mergesort](#mergesort)
+    * [Quicksort](#quicksort)
+    * [Counting Sort](#counting-sort)
+    * [Priority Queues](#priority-queues)
+    * [Application](#application)
+        * [System sorts](#system-sorts)
+        * [Convex Hull](#convex-hull)
+        * [Quick Sort Easy Partition](#quick-sort-easy-partition)
+
 # Sorting
 
 > [Algorithms - 2 Sorting](http://algs4.cs.princeton.edu/20sorting/)
